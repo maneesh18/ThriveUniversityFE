@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+
+.home-content {
+    background-image: linear-gradient(to right, #DECBA4, #3E5151);
+}
+
+.home-top-text {
+    padding: 40px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.8);
+    background-image: linear-gradient(to right, #DECBA4, #3E5151)
+}
+.home-top-text span{
+    font-size: 60px;
+}
+
+
+.home-content-div {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    gap: 10px;
+    margin: 100px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+}
+
+.home-content-reverse-div {
+    flex-direction: row-reverse;
+}
+
+.home-content-text h2 {
+    text-align: center;
+    font-family: 'Black Han Sans', sans-serif;
+}
+
+.home-content-text p {
+    margin: 30px;
+    font-size: 20px;
+    color: black;
+}
+
+.home-content-text p::first-letter {
+    font-size: 60px;
+    color: red;
+}
+
+/* .home-content-text::first-line{
+    color: #c4c400;
+    letter-spacing: 1px;
+    font-weight: bold;
+} */
+.home-content-img {
+    height: 30%;
+    width: 50%;
+    border-radius: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+    .home-content-div {
+        flex-direction: column;
+        margin: 30px 20px;
+    }
+
+    .home-content-img {
+        height: 60%;
+        width: 80%;
+    }
+
+}
