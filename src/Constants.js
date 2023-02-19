@@ -6,5 +6,4 @@ export const HOME_CONTENT2 = "As a student at Thrive University, you will have a
 export const HOME_IMAGE2 = "https://www.elte.hu/en/media/5c/84/e1fe259f623d5a808f09bfe08d0878003c22055eefaabab70ba526b69ab0/pj-4114.jpg"
 export const LOGIN_CONTENT="Welcome to the Login page of Thrive University. Please enter your username and password to access your account."
 export const LOGIN_IMAGE="https://img.freepik.com/free-vector/global-data-security-personal-data-security-cyber-data-security-online-concept-illustration-internet-security-information-privacy-protection_1150-37336.jpg?w=740&t=st=1676739972~exp=1676740572~hmac=28be8aa4e8f913bd27ed15cefab0a1b26187a60932139669c65db87be139078c"
-// "https://img.freepik.com/free-vector/privacy-policy-concept-illustration_114360-7853.jpg?w=740&t=st=1676739838~exp=1676740438~hmac=eb57497d47368760494c976b7a9771e1cdd451c322b7ef134ea74b96e9fc0b10"
-// "https://img.freepik.com/free-vector/access-control-system-abstract-concept_335657-3180.jpg?w=740&t=st=1676739609~exp=1676740209~hmac=0085cfaaee92f33e5d7ecd6700b9f85ffe52565d18f091b5b4c1e39f6d83573f"
+export const LOGIN_CONTENT1="As a Thrive University student, faculty, or staff member, you have access to a wide range of resources and tools designed to support your academic and professional goals. Log in to your account to access your course materials, grades, email, and more."
