@@ -1,0 +1,72 @@
+.about {
+    background-color: #d4ebf2;
+}
+.about-stats{
+    display: flex;
+    width: 100%;
+    padding: 20px 10px;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+.stat-div{
+    font-weight: bold;
+    display: flex;
+    background-color: var(--navy-blue);
+    color: white;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 200px;
+    padding: 20px 10px;
+    transition: transform .3s;
+}
+.stat-div span{
+    font-size: 40px;
+}
+.stat-div p{
+    font-size: 20px;
+    text-align: center;
+}
+.stat-div:hover{
+    transform: scale(1.1);
+}
+.about-funs{
+    display: flex;
+    width: 100%;
+    padding: 10px 10px;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.about-fun-icon{
+    height: 150px;
+    width: 180px;
+    color: var(--navy-blue);
+    margin: 20px;
+    transition: transform .3s;
+}
+.about-fun-icon:hover{
+    transform: scale(1.1);
+}
+.fun-div p{
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+    .stat-div{
+        width: 170px;
+    }
+    .about-fun-icon{
+        height: 90px;
+        width: 90px;
+        margin: 10px;
+    }
+    .fun-div p{
+        font-size: 15px;
+    }
+}
