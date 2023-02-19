@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function Header() {
@@ -20,6 +20,13 @@ function Header() {
     // Close the Offcanvas
     handleClose();
   };
+
+  const navigate = useNavigate();
+
+  function handleClick(event) {
+
+    navigate('/login',{replace:true});
+  }
   return (
     <>
       <Navbar
@@ -65,7 +72,7 @@ function Header() {
                   Contact
                 </Nav.Link>
               </Nav>
-              <Button variant="outline-light">Login</Button>
+              <Button variant="outline-light" onClick={handleClick} >Login</Button>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>

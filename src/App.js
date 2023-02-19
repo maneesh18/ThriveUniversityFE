@@ -9,6 +9,7 @@ import Academics from "./screens/Academics";
 import Placements from "./screens/Placements";
 import Contact from "./screens/Contact";
 import Footer from "./components/Footer";
+import Login from "./screens/login/Login";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           <Route exact path="/academics" element={<Academics />}></Route>
           <Route exact path="/placements" element={<Placements />}></Route>
           <Route exact path="/contact" element={<Contact />}></Route>
-          <Route exact path="/login" element={<Contact />}></Route>
+          <Route exact path="/login" element={<Login />}></Route>
         </Routes>
       </Router>
       <Footer/>
