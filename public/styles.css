@@ -25,6 +25,10 @@ body {
     font-family: 'Merriweather', serif;
 }
 
+.card-heading-font{
+    font-family: 'Black Han Sans', sans-serif;
+}
+
 .screen-text-div h1 {
     color: white;
 }
