@@ -3,7 +3,7 @@ import "./homeStyles.css";
 import HeadComponent from "../../components/HeadComponent";
 import { HOME_PARAGRAPH_TEXT, HOME_HEADING_TEXT } from "../../Constants";
 import Slider from "./Slider";
-import HomeContent from "./HomeContent";
+import GridContent from "../../components/GridContent";
 import {
   HOME_IMAGE1,
   HOME_CONTENT1,
@@ -15,6 +15,7 @@ export default function Home() {
   return (
     <div className="screen">
       <HeadComponent
+        imageSrc = "https://marvel-b1-cdn.bc0a.com/f00000000047992/www.letu.edu/campaigns/images/background-images/busines-admin-management.jpg"
         paragraphText={HOME_PARAGRAPH_TEXT}
         headingText={HOME_HEADING_TEXT}
         displayButton={true}
@@ -31,14 +32,14 @@ export default function Home() {
         they will meet in our changing world.
       </p>
       <div className="home-content">
-        <HomeContent
-          class="home-content-div"
+        <GridContent
+          class="grid-content-div"
           image={HOME_IMAGE1}
           headingText="EXCELLENCE MEETS DIVERSITY"
           text={HOME_CONTENT1}
         />
-        <HomeContent
-          class="home-content-reverse-div home-content-div"
+        <GridContent
+          class="grid-content-reverse-div grid-content-div"
           image={HOME_IMAGE2}
           headingText="UNLEASH YOUR POTENTIAL"
           text={HOME_CONTENT2}

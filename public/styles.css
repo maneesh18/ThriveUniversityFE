@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
 
+
 body {
     font-family: 'Lato', sans-serif;
 }
@@ -134,13 +135,13 @@ body {
     color: white;
 }
 
-
-
-
 .top-navbar {
     background: transparent;
     backdrop-filter: blur(2px);
-    height: 70px;
+}
+.top-navbar-scroll{
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.9) 100%);
+    transition: background-image 200ms ease;
 }
 
 .navbar-logo-text {
@@ -216,4 +217,56 @@ body {
 
 .head-component {
     position: relative;
+}
+
+
+
+.grid-content-div {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    gap: 10px;
+    margin: 100px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+}
+
+.grid-content-reverse-div {
+    flex-direction: row-reverse;
+}
+
+.grid-content-text h2 {
+    text-align: center;
+    font-family: 'Black Han Sans', sans-serif;
+}
+
+.grid-content-text p {
+    margin: 30px;
+    font-size: 20px;
+    color: black;
+}
+
+.grid-content-text p::first-letter {
+    font-size: 60px;
+    color: red;
+}
+
+.grid-content-img {
+    height: 30%;
+    width: 50%;
+    border-radius: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+    .grid-content-div {
+        flex-direction: column;
+        margin: 30px 20px;
+    }
+
+    .grid-content-img {
+        height: 60%;
+        width: 80%;
+    }
+
 }

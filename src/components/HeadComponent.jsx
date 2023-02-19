@@ -6,7 +6,7 @@ function HeadComponent(props) {
   const displayButton = props.displayButton;
   return (
     <div className="head-component">
-      <BgImage />
+      <BgImage imageSrc = {props.imageSrc}/>
       <div className="screen-text-div">
         <h1 className="heading-font">{props.headingText}</h1>
         <div></div>
