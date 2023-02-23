@@ -1,16 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import {  LOGIN_CONTENT, LOGIN_CONTENT1, LOGIN_IMAGE } from "../../Constants";
 import './login_styles.css';
 import { ImQuotesLeft,ImQuotesRight } from "react-icons/im";
-
+import axios from "axios"
+import { LocalDomain } from "../../api_labels";
+import {AiFillEye,AiFillEyeInvisible} from 'react-icons/ai';
+import BgImage from "../../components/BgImage";
 export default function Login () {
+  const [showPassword,setShowPassword]=useState("password");
+ function handleLogin(e){
+  e.preventDefault();
+  axios.get(
+      LocalDomain+"/login/result")
+      .then((json) => console.log("Api result",json));
+    
+  }
+  const togglePassword =()=>{
+    if(showPassword==="password")
+    {
+     setShowPassword("text")
+     return;
+    }
+    setShowPassword("password")
+  }
    
     return (
       <div className="login-component">
+        <div className="login-background-img">
+        <img className='bgimage-img' src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&w=1000&q=80" alt="home" />
+          </div>
+        <div className="login">
         <p className="login-top-text"><sup><ImQuotesLeft style={{height:"30px",width:"30px",position:"relative",right:"10px"}}/></sup>{LOGIN_CONTENT1}<sup><ImQuotesRight  style={{height:"30px",width:"30px",position:"relative",left:"10px"}}/></sup></p>
-         <div className="login-content">
-         <img className='login-content-img' src={LOGIN_IMAGE} alt="home" />
       <div className="login-form-content-div">
         <form className="container">
         <h3 className="heading-font"> Sign In</h3>
@@ -28,34 +49,45 @@ export default function Login () {
         </div>
         <div className="mb-3">
           <label style={{marginBottom:"10px"}}>Password</label>
-          <input
-            type="password"
+          <div className="password-input">
+
+          <input 
+            type={showPassword}
             className="form-control"
             placeholder="Enter password"
-            required="true"
-          />
+            required="true"/>
+          { showPassword==="password"? <AiFillEye onClick={togglePassword} fill="black"style={{height:"40px",width:"20px",position:"relative",right:"30px"}}/> :<AiFillEyeInvisible onClick={togglePassword} fill="black"style={{height:"30px",width:"20px",position:"relative",right:"30px"}}/> }
+            </div>
+
         </div>
         <div style={{textAlign:"center"}}>
-          <button type="submit" className="btn btn-primary submit-btn" style={{margin:"0px auto"}}>
+          <button type="submit" className="btn btn-primary submit-btn" style={{margin:"0px auto"}} onClick={handleLogin}>
             Submit
           </button>
         </div>
         <p className="forgot-password text-right">
-          Forgot <a href="#">password?</a>
+           <a href="#" style={{color:"white"}}>Forgot password?</a>
         </p>
         </form>
         </div>
-        </div>
-        <br></br>
         <div className="public-btn-div">
           
-        <Button  variant="warning"  className="public-btn">Apply</Button>
-          
-        <Button  variant="warning" className="public-btn" >Track Application</Button>
-      <br></br>
+        <button type="submit" className="btn btn-primary public-btn" style={{margin:"0px auto"}} >
+            Apply
+          </button>
+        
+        
+          <button type="submit" className="btn btn-primary public-btn" style={{margin:"0px auto"}} >
+          Track Application
+          </button>
+      
       </div>
-      <br></br>
-    
+     
+     
+      
+      </div>
+      
+    {/* </div> */}
     </div>
     )
   
