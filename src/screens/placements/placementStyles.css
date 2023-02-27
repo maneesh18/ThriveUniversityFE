@@ -1,0 +1,77 @@
+.placement{
+    /* background-color: #d4ebf2; */
+    background-image: url("https://www.kluniversity.in/admissions/engineering/assets/img/greybg-web.jpg");
+}
+.placement-office{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    margin: 40px 200px;
+    border-top: 3px solid black ;
+    border-bottom: 3px solid black;
+}
+.placement-office img{
+    width: 150px;
+    object-fit: cover;
+}
+.placement-office-info{
+    font-size: 18px;
+}
+.placement-recruiter{
+    position: relative;
+}
+.placement-recruiter-image{
+    height:400px;
+    width: 100%;
+    object-fit: cover;
+    object-position: 0 90%;
+    filter: brightness(60%);
+}
+.placement-recruiter-content{
+    padding: 20px;
+    position: absolute;
+    left: 0;
+    top: 5%;
+    color: white;
+}
+.placement-recruiter-content div{
+    display: flex;
+    gap:20px
+
+}
+.placement-recruiter-content-box{
+    background-color: rgba(0,0,0,.514);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: self-end;
+    padding: 10px;
+}
+
+.placement-slider{
+    padding: 30px;
+}
+.placement-slider-image{
+    border-radius: 10%;
+    width: 200px;
+    height: 200px;
+}
+@media only screen and (max-width: 768px) {
+    .placement-office{
+        margin: 4px 20px;
+        flex-direction: column-reverse;
+        gap: 20px;
+    }
+    .placement-recruiter-image{
+        height:900px;
+    }
+    .placement-recruiter-content div{
+        flex-direction: column;
+    }
+    .placement-slider-image{
+        border-radius: 10%;
+        width: 100px;
+        height: 100px;
+    }
+}
