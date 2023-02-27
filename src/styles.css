@@ -43,7 +43,7 @@ body {
 
 .screen-text-div {
     position: absolute;
-    top: 35%;
+    bottom: 10%;
     left: 5%;
     color: rgba(218, 218, 218, 1.00);
     display: flex;
@@ -218,7 +218,9 @@ body {
 .head-component {
     position: relative;
 }
-
+.side-heading{
+    font-family: 'Black Han Sans', sans-serif;
+}
 
 
 .grid-content-div {

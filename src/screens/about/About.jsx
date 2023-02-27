@@ -9,7 +9,7 @@ import {
   ABOUT_CONTENT1,
   ABOUT_IMAGE1,
 } from "../../Constants";
-import AboutStats from "./AboutStats";
+import AboutStats from "../../components/AboutStats";
 
 import { BiFootball, BiJoystick } from "react-icons/bi";
 import { FaChess, FaSwimmer } from "react-icons/fa";
@@ -18,6 +18,7 @@ import { IoFitness } from "react-icons/io5";
 import { ImMusic } from "react-icons/im";
 import { RiImageEditFill } from "react-icons/ri";
 import { GiArchiveResearch } from "react-icons/gi";
+import SideHeading from "../../components/SideHeading";
 
 export default function About() {
   const iconsList = [
@@ -55,14 +56,9 @@ export default function About() {
           text={ABOUT_CONTENT2}
         />
       </div>
-      <h1
-        style={{
-          textAlign: "center",
-          fontFamily: "'Black Han Sans', sans-serif",
-        }}
-      >
+      <SideHeading>
         More Than Just a University
-      </h1>
+      </SideHeading>
       <div className="about-stats">
         <AboutStats class="stat-div" heading="14,000" description="Students" />
         <AboutStats
@@ -81,14 +77,9 @@ export default function About() {
           description="Full-Time Faculty"
         />
       </div>
-      <h1
-        style={{
-          textAlign: "center",
-          fontFamily: "'Black Han Sans', sans-serif",
-        }}
-      >
+      <SideHeading>
         Thrive Outside the Box
-      </h1>
+      </SideHeading>
       <div className="about-funs">
         {iconsList.map((item) => {
           return (
