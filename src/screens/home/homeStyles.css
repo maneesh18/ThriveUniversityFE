@@ -1,17 +1,16 @@
 
 
-.home-content {
-    background-image: linear-gradient(to right, #DECBA4, #3E5151);
+.home {
+    /* background-color: #d4ebf2; */
+    background-image: url("https://www.kluniversity.in/admissions/engineering/assets/img/greybg-web.jpg");
 }
 .home-top-text {
-    padding: 40px;
+    padding: 40px 40px 0px;
     text-align: center;
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 0px;
     font-style: italic;
-    color: rgba(255, 255, 255, 0.8);
-    background-image: linear-gradient(to right, #DECBA4, #3E5151)
 }
 .home-top-text span{
     font-size: 60px;

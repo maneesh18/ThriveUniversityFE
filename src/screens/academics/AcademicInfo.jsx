@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import HeadComponent from "../../components/HeadComponent";
 import DepartmentInfo from "./DepartmentInfo";
 import { useSearchParams } from "react-router-dom";

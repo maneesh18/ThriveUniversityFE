@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import { COURSE_LIST } from "./AcademicConstants";
 import Course from "./Course";
 

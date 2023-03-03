@@ -1,0 +1,114 @@
+.contact{
+    background-image: url("https://www.kluniversity.in/admissions/engineering/assets/img/greybg-web.jpg");
+}
+.contact-general-info div{
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+.contact-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-top: 5px solid #b1040e;
+    padding: 30px 10px;
+}
+.contact-address{
+    display: flex;
+    padding: 20px;
+    justify-content: space-around;
+}
+.map-style{
+    height: 300px;
+    width: 600px;
+    border-right: 5px solid #4CAF50 ;
+    border-radius: 5px;
+}
+
+
+.contact-feedback{
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+}
+.contact-feedback img{
+    height: 400px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.feedback-form {
+    width: 80%;
+    max-width: 500px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  .feedback-form h2 {
+    text-align: center;
+    margin-top: 0;
+  }
+  
+  .feedback-form .form-group {
+    margin-bottom: 10px;
+  }
+  
+  .feedback-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .feedback-form input[type="text"],
+  .feedback-form input[type="email"],
+  .feedback-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .feedback-form textarea {
+    resize: vertical;
+  }
+  
+  .feedback-form button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+
+@media only screen and (max-width: 768px) {
+    .contact-general-info div{
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        margin: 0px auto;
+    }
+    .contact-address{
+        flex-direction: column;
+        gap: 20px;
+        margin: 0px auto;
+    }
+    .map-style{
+        width: 400px;
+    }
+    .feedback-form {
+        width: 100%;
+        border: none;
+      }
+      .contact-feedback img{
+        display: none;
+    }
+}
