@@ -157,6 +157,8 @@ body {
 
 .bgimage-img {
     width: 100%;
+    max-height: 600px;
+    object-fit: cover;
     filter: brightness(40%);
 }
 
@@ -182,7 +184,7 @@ body {
     }
 
     .bgimage-img {
-        height: 700px;
+        max-height: 700px;
         object-fit: cover;
     }
 

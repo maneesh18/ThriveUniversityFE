@@ -13,7 +13,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="screen">
+    <div className="screen home">
       <HeadComponent
         imageSrc = "https://marvel-b1-cdn.bc0a.com/f00000000047992/www.letu.edu/campaigns/images/background-images/busines-admin-management.jpg"
         paragraphText={HOME_PARAGRAPH_TEXT}

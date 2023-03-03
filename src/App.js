@@ -1,13 +1,13 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
 import Home from "./screens/home/Home";
 import About from "./screens/about/About";
 import Academics from "./screens/academics/Academics";
 import Placements from "./screens/placements/Placements";
-import Contact from "./screens/Contact";
+import Contact from "./screens/contact/Contact";
 import Footer from "./components/Footer";
 import Login from "./screens/login/Login";
 import AcademicInfo from "./screens/academics/AcademicInfo";

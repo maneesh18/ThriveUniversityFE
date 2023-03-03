@@ -12,7 +12,10 @@ export const ACADEMIC_PARAGRAPH_TEXT =
 export const PLACEMENT_HEADING_TEXT = "Unlocking Potential, Building Futures";
 export const PLACEMENT_PARAGRAPH_TEXT =
   "we are dedicated to helping our graduates succeed in their careers. Our career services center provides students with access to a range of resources and support, including resume and interview preparation, networking events, and job search assistance. Our graduates are highly sought after by top employers in a variety of industries, and our robust alumni network ensures that our students have access to career opportunities long after graduation.";
-export const HOME_IMAGE1 =
+  export const CONTACT_HEADING_TEXT = "Connect with Us";
+  export const CONTACT_PARAGRAPH_TEXT ="At Thrive University, we are committed to providing students, faculty, staff, and the community with exceptional service and support. Our contact page is the place to go if you have any questions, concerns, or feedback. Our knowledgeable and friendly team is ready to assist you with anything you need, whether it's information about our programs, campus resources, or general inquiries. We offer a variety of ways to get in touch, including phone, email, and in-person appointments. Don't hesitate to reach out - we're here to help you thrive.";
+
+  export const HOME_IMAGE1 =
   "https://www.georgetown.edu/wp-content/uploads/2019/09/20190828_FirstDay_NingLeng-_McCourt-45110optimized-2000x1500-c-default.jpg";
 export const HOME_CONTENT1 =
   "Our university is dedicated to excellence in education and research across a wide range of fields, from the arts and humanities to the sciences and engineering. With a diverse community of students, faculty, and staff from around the world, Thrive University is a dynamic and vibrant place to learn, grow, and explore.";
