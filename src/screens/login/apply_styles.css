@@ -1,0 +1,76 @@
+.personal-details-content {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  padding-top: 80px;
+  color: white;
+}
+.personal-details-input {
+  padding: 10px;
+}
+.personal-details-form {
+  width: 650px;
+  padding: 30px 30px 5px;
+  background: transparent;
+  color: aliceblue;
+  align-items: center;
+  margin: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .personal-details-form {
+    width: 100%;
+    padding: 8px;
+    padding-bottom: 10px;
+    margin: auto;
+  }
+  .login-background-img {
+    object-fit: fill;
+  }
+  .bgimage-img {
+    height: 750px;
+  }
+}
+/* end of personal details styles */
+
+.study_details-content {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  padding-top: 80px;
+  color: white;
+  padding: 100px 40px;
+}
+.details-parent-div {
+  display: flex;
+}
+.details-header-div {
+  border: 2px solid lightgray;
+  background-color: lightgray;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+.details-header-div p {
+  margin: 0;
+  padding: 10px;
+  font-size: 20px;
+  top: 50%;
+  color: black;
+}
+.single-content-parent-div{
+  border: 2px solid white;
+  padding: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.single-content-vertical-div{
+  display: flex;
+   justify-content: space-evenly;
+   margin-bottom: 5px;
+}

@@ -10,7 +10,7 @@ import Placements from "./screens/Placements";
 import Contact from "./screens/Contact";
 import Footer from "./components/Footer";
 import Login from "./screens/login/Login";
-
+import Apply from "./screens/login/Apply";
 function App() {
   return (
     <div className="App">
@@ -24,6 +24,7 @@ function App() {
           <Route exact path="/placements" element={<Placements />}></Route>
           <Route exact path="/contact" element={<Contact />}></Route>
           <Route exact path="/login" element={<Login />}></Route>
+          <Route exact path="/apply" element={<Apply />}></Route>
         </Routes>
       </Router>
       <Footer/>
