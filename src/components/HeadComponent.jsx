@@ -12,6 +12,7 @@ function HeadComponent(props) {
         <div></div>
         <p>{props.paragraphText}</p>
         <Button
+          onClick={props.clickHandler}
           variant="warning"
           style={{
             width: "300px",

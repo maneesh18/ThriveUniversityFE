@@ -34,7 +34,7 @@ export default function Login () {
     return (
       <div className="login-component">
         <div className="login-background-img">
-        <img className='bgimage-img' src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&w=1000&q=80" alt="home" />
+        <img className='login-bgimage-img' src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&w=1000&q=80" alt="home" />
           </div>
         <div className="login">
         <p className="login-top-text"><sup><ImQuotesLeft style={{height:"30px",width:"30px",position:"relative",right:"10px"}}/></sup>{LOGIN_CONTENT1}<sup><ImQuotesRight  style={{height:"30px",width:"30px",position:"relative",left:"10px"}}/></sup></p>

@@ -10,17 +10,19 @@ import { Link, useNavigate } from "react-router-dom";
 function Header() {
   const expand = "lg";
   const [show, setShow] = useState(false);
-  
-  window.onscroll = function () { 
-    let myNav = document.getElementById('nav');
-    if (document.body.scrollTop >= 200 || document.documentElement.scrollTop >= 200 ) {
-          myNav.classList.add("top-navbar-scroll");
-          myNav.classList.remove("top-navbar");
-      } 
-      else {
-          myNav.classList.add("top-navbar");
-          myNav.classList.remove("top-navbar-scroll");
-      }
+
+  window.onscroll = function () {
+    let myNav = document.getElementById("nav");
+    if (
+      document.body.scrollTop >= 200 ||
+      document.documentElement.scrollTop >= 200
+    ) {
+      myNav.classList.add("top-navbar-scroll");
+      myNav.classList.remove("top-navbar");
+    } else {
+      myNav.classList.add("top-navbar");
+      myNav.classList.remove("top-navbar-scroll");
+    }
   };
 
   const handleShow = () => setShow(true);
@@ -33,26 +35,25 @@ function Header() {
 
   const navigate = useNavigate();
 
-  function handleClick(event) {
-
-    navigate('/login',{replace:true});
+  function handleLoginClick(event) {
+    navigate("/login", { replace: true });
+    handleClose();
   }
   return (
     <>
       <Navbar
         id="nav"
-        key={expand}
         variant="dark"
         expand={expand}
         fixed="top"
-        style={{height:"70px"}}
+        style={{ height: "70px" }}
       >
         <Container fluid>
           <Navbar.Brand href="/">
             <img
               alt="logo"
               src="../images/logo.jpeg"
-              className="d-inline-block align-top circular-image navbar-logo-icon"
+              className="navbar-logo-icon d-inline-block align-top circular-image "
             />{" "}
             <span className="heading-font navbar-logo-text">
               {" "}
@@ -94,7 +95,9 @@ function Header() {
                   Contact
                 </Nav.Link>
               </Nav>
-              <Button variant="outline-light" onClick={handleClick} >Login</Button>
+              <Button variant="outline-light" onClick={handleLoginClick}>
+                Login
+              </Button>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>
