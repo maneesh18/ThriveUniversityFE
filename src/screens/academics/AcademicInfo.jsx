@@ -4,6 +4,7 @@ import DepartmentInfo from "./DepartmentInfo";
 import { useSearchParams } from "react-router-dom";
 import CoursesInfo from "./CoursesInfo";
 import Paragraph from "../../components/Paragraph";
+import CalendarInfo from "./CalendarInfo";
 
 function AcademicInfo() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -11,7 +12,7 @@ function AcademicInfo() {
   const componentDictonary = {
     "academic-departments": <DepartmentInfo />,
     "academic-courses": <CoursesInfo />,
-    "academic-calendar": <h1>academic calender</h1>,
+    "academic-calendar": <CalendarInfo />,
   };
   const bodyParagraphText =
     "The Thrive Graduate School promotes excellence in graduate education and contributes to a vibrant research environment at UNT. It oversees graduate program development and collaborates with departments on the recruitment, admission and enrollment services provided to the university's 6,700 graduate students.";
@@ -20,7 +21,7 @@ function AcademicInfo() {
   return (
     <div className="about-info-screen">
       <HeadComponent
-        imageSrc="https://www.shutterstock.com/image-photo/radcliffe-quadrangle-the-quad-harvard-260nw-396023383.jpg"
+        imageSrc="https://comps.canstockphoto.com/can-stock-photo_csp9540376.jpg"
         paragraphText={HeadingParagraphText}
         headingText="Thrives's Colleges and Schools"
         displayButton={true}
