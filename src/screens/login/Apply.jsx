@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import FormPersonalDetails from "./FormPersonalDetails";
 import FormStudyDetails from "./FormStudyDetails";
 import ExamDetails from "./ExamDetails";
@@ -27,12 +27,14 @@ const Apply = (props) => {
     department: "",
     course: "",
     address: "",
+    level_of_education:"",
     employment_status: null,
     education: null,
     exam_details:null,
   });
 
 
+  const [departmentIndex, setDepartmentIndex] = useState(-1);
 
   const [formFields, setFormFields] = useState([
     { college_name: "", gpa: "", file: null, level_of_education: "" },
@@ -153,6 +155,9 @@ const addScoreFields = () => {
 
 const [openScore, setOpenScore] = useState(1);
 
+useEffect(() => {
+  console.log('Do something after counter has changed', formData);
+}, [formData]);
 
 
   switch (step) {
@@ -169,6 +174,8 @@ const [openScore, setOpenScore] = useState(1);
           prevStep={prevStep}
           formData={formData}
           setFormData={setFormData}
+          departmentIndex={departmentIndex}
+          setDepartmentIndex={setDepartmentIndex}
           //   values={values}
         />
       );

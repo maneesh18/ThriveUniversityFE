@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import "./apply_styles.css";
 import "./login_styles.css";
-import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 
+import ApplicationBottom from "./ApplicationBottom";
 import { MdOutlineDelete } from "react-icons/md";
-import { AiOutlinePlus, AiOutlineDown } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const FormStudyDetails = (props) => {
   const back = (e) => {
@@ -21,18 +21,26 @@ const FormStudyDetails = (props) => {
     props.nextStep();
     console.log("Education Form details", props.formData);
   };
+  const handleOnContinue=()=>{
+    props.setFormData({
+      ...props.formData,
+      employment_status: props.workExpformFields,
+      eduction:props.formFields
+    });
+  }
+  useEffect(()=>{
+    console.log("Inside Study Details Use effect",props.formData)
+  },[])
   return (
-    <div>
-      <div className="login-background-img">
-        <img
-          className="login-bgimage-img"
-          src="https://media.istockphoto.com/id/1012049016/photo/young-man-writing-college-or-university-application-form-with-pen-and-paper-student-applying.jpg?s=612x612&w=is&k=20&c=0ucIgjGmrBOgxsooJ7ms5xtTK14OpITO3U_Fzf6VRNA="
-          alt="home"
-        />
-      </div>
       <div className="study_details-content">
+        <div className="study_details_wrapper">
+        
+        <div className="heading-font wrapper-1 prof-wrapper-1">
+          PROFESSIONAL<div> DETAILS</div>
+        </div>
+
         <div className="details-parent-div">
-          <div className="study-details-education-div" style={{ width: "50%" }}>
+          <div className="study-details-education-div" >
             <div className="details-header-div" onClick={props.addFields}>
               <p>
                 <AiOutlinePlus
@@ -48,9 +56,12 @@ const FormStudyDetails = (props) => {
                 console.log("Education updated", props.openEducation, index);
                 return index + 1 == props.openEducation ? (
                   <div key={index + 1} className="single-content-parent-div">
+                    <div className="side-heading" style={{fontSize:"20px"}}>
+                      Education {index+1}
+                    </div>
                     <div className="single-content-vertical-div">
-                      <div style={{ width: "45%" }}>
-                        <div style={{ marginBottom: "10px" }}>
+                      <div >
+                        <div className="input-element-div">
                           <label style={{ marginBottom: "10px" }}>
                             College/School Name
                           </label>
@@ -62,7 +73,7 @@ const FormStudyDetails = (props) => {
                             className="form-control"
                           />
                         </div>
-                        <div>
+                        <div className="input-element-div">
                           <label style={{ marginBottom: "10px" }}>
                             GPA/Percentage
                           </label>
@@ -76,8 +87,8 @@ const FormStudyDetails = (props) => {
                         </div>
                       </div>
 
-                      <div style={{ width: "45%" }}>
-                        <div style={{ marginBottom: "10px" }}>
+                      <div >
+                        <div className="input-element-div">
                           <label style={{ marginBottom: "10px" }}>
                             Upload Memo
                           </label>
@@ -85,42 +96,36 @@ const FormStudyDetails = (props) => {
                             name="file"
                             placeholder="Upload"
                             onChange={(event) => props.handleFormChange(event, index)}
-                            value={form.file}
+                            value=""
                             className="form-control"
                             type="file"
                           />
                         </div>
-                        <div>
+                        <div className="input-element-div">
                           <label style={{ marginBottom: "10px" }}>
                             Level of Education
                           </label>
-                          <div>
                             <select
-                              style={{
-                                width: "100%",
-                                height: "40px",
-                                borderRadius: "8px",
-                                paddingLeft: "10px",
-                              }}
                               onChange={(event) =>
                                 props.handleFormChange(event, index)
                               }
                               name="level_of_education"
+                              className="form-control"
                             >
-                              <option>Choose...</option>
+                              <option>{form.level_of_education != "" ? form.level_of_education : "Choose.."}</option>
                               <option>Algorithm</option>
                               <option>Language</option>
                               <option>Data Structure</option>
                             </select>
-                          </div>
+                          
                         </div>
                       </div>
                     </div>
-                    <div style={{ display: "flex" }}>
-                      <MdOutlineDelete
-                        size="2em"
-                        onClick={() => props.removeFields(index)}
-                        style={{ margin: "0px auto", cursor: "pointer" }}
+                    <div style={{ }} className="delete-button"onClick={() => props.removeFields(index)}>
+                    <div style={{fontSize:"18px"}}> Delete</div> <MdOutlineDelete
+                        size="1.5em"
+                        
+                        style={{  }}
                       />
                     </div>
                   </div>
@@ -129,23 +134,27 @@ const FormStudyDetails = (props) => {
                   //   Education{index+1}
                   // </Button>
                   <div
-                    className="details-header-div"
-                    onClick={() => props.setOpenEducation(index + 1)}
+                    className="side-heading header-div "
+                  
                   >
-                    <p>
+                    <div className="details-wrapper-1"   onClick={() => props.setOpenEducation(index + 1)}>
                       Education {index + 1}
-                      <AiOutlineDown
-                        size="0.9em"
-                        style={{ position: "relative", bottom: "2px" }}
-                      />{" "}
-                    </p>
+                    </div>
+                    <div className="delete-icon-div"   onClick={() =>  props.removeFields(index)}>
+                    <MdOutlineDelete
+                        size="1.5em"
+                        onClick={() => props.removeFields(index)}
+                        style={{  }}
+                      />
+                      </div>
+                    
                   </div>
                 );
               })}
             </form>
           </div>
 
-          <div className="work-details-education-div" style={{ width: "50%" }}>
+          <div className="work-details-education-div" >
             <div className="details-header-div" onClick={props.addWorkFields}>
               <p>
                 <AiOutlinePlus
@@ -161,13 +170,12 @@ const FormStudyDetails = (props) => {
                 return index + 1 == props.openWork ? (
                   <div key={index} className="single-content-parent-div">
                     <div>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <div style={{ width: "45%" }}>
+                    <div className="side-heading" style={{fontSize:"20px"}}>
+                      Work Experience {index+1}
+                    </div>
+                      <div className="single-content-vertical-div">
+                        <div >
+                        <div  className="input-element-div">
                           <label style={{ marginBottom: "10px" }}>
                             Company Name
                           </label>
@@ -181,7 +189,24 @@ const FormStudyDetails = (props) => {
                             className="form-control"
                           />
                         </div>
-                        <div style={{ width: "45%", marginBottom: "10px" }}>
+                         
+                        <div  className="input-element-div">
+                          <label style={{ marginBottom: "10px" }}>From *</label>
+                          <input
+                            name="start_date"
+                            placeholder="pick a date"
+                            onChange={(event) =>
+                              props.handleWorkFormChange(event, index)
+                            }
+                            value={form.start_date}
+                            className="form-control"
+                            required="true"
+                            type="date"
+                          />
+                        </div>
+                            </div>
+                            <div>
+                        <div  className="input-element-div">
                           <label style={{ marginBottom: "10px" }}>
                             Designation
                           </label>
@@ -195,24 +220,23 @@ const FormStudyDetails = (props) => {
                             className="form-control"
                           />
                         </div>
-                      </div>
-
-                      <div style={{ marginBottom: "10px" }}>
-                        <label style={{ marginBottom: "10px" }}>
-                          Office Location
-                        </label>
-                        <input
-                          name="location"
-                          onChange={(event) =>
-                            props.handleWorkFormChange(event, index)
-                          }
-                          value={form.location}
-                          placeholder="location..."
-                          className="form-control"
-                          type="text"
-                        />
-                      </div>
-                      <div style={{ marginBottom: "10px" }}>
+                        
+                        <div className="input-element-div">
+                          <label style={{ marginBottom: "10px" }}>To *</label>
+                          <input
+                            name="end_date"
+                            placeholder="Pick a data"
+                            onChange={(event) =>
+                              props.handleWorkFormChange(event, index)
+                            }
+                            value={form.end_date}
+                            className="form-control"
+                            type="date"
+                          />
+                        </div>
+                        </div>
+                        </div>
+                      <div style={{width:"93%",marginLeft:"20px",marginBottom:"20px"}}>
                         <label style={{ marginBottom: "10px" }}>
                           Description
                         </label>
@@ -228,77 +252,45 @@ const FormStudyDetails = (props) => {
                           cols="60"
                         />
                       </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <div style={{ width: "45%" }}>
-                          <label style={{ marginBottom: "10px" }}>From *</label>
-                          <input
-                            name="start_date"
-                            placeholder="pick a date"
-                            onChange={(event) =>
-                              props.handleWorkFormChange(event, index)
-                            }
-                            value={form.start_date}
-                            className="form-control"
-                            required="true"
-                            type="date"
-                          />
-                        </div>
-                        <div style={{ width: "45%" }}>
-                          <label style={{ marginBottom: "10px" }}>To *</label>
-                          <input
-                            name="end_date"
-                            placeholder="Pick a data"
-                            onChange={(event) =>
-                              props.handleWorkFormChange(event, index)
-                            }
-                            value={form.end_date}
-                            className="form-control"
-                            type="date"
-                          />
-                        </div>
-                      </div>
+                     
+                     
                     </div>
-                    <div style={{ display: "flex" }}>
-                      <MdOutlineDelete
-                        size="2em"
-                        onClick={() => props.removeWorkFields(index)}
-                        style={{ margin: "0px auto", cursor: "pointer" }}
+                    <div style={{ }} className="delete-button"onClick={() => props.removeWorkFields(index)}>
+                    <div style={{fontSize:"18px"}}> Delete</div> <MdOutlineDelete
+                        size="1.5em"
+                        
+                        style={{  }}
                       />
                     </div>
                   </div>
                 ) : (
+                 
                   <div
-                    className="details-header-div"
-                    onClick={() => props.setOpenWork(index + 1)}
-                  >
-                    <p>
-                      Work Experience {index + 1}
-                      <AiOutlineDown
-                        size="0.9em"
-                        style={{ position: "relative", bottom: "2px" }}
-                      />{" "}
-                    </p>
+                  className="side-heading header-div "
+                
+                >
+                  <div className="details-wrapper-1"   onClick={() => props.setOpenWork(index + 1)}>
+                    Work Experience {index + 1}
                   </div>
+                  <div className="delete-icon-div"   onClick={() =>  props.removeWorkFields(index)}>
+                  <MdOutlineDelete
+                      size="1.5em"
+                      onClick={() => props.removeFields(index)}
+                      style={{  }}
+                    />
+                    </div>
+                  
+                </div>
                 );
               })}
             </form>
           </div>
         </div>
-
-        <Button color="warning" onClick={back}>
-          Back
-        </Button>
-
-        <Button color="primary" onClick={continuePage}>
-          Continue
-        </Button>
+        
+        </div>
+      
+        <ApplicationBottom nextStep={props.nextStep} prevStep={props.prevStep} onContinue={handleOnContinue} formData={props.formData} />
       </div>
-    </div>
   );
 };
 

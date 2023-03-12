@@ -1,0 +1,31 @@
+.preview-header{
+    font-size: 30px;
+}
+.personal-details-body{
+    padding: 10px;
+    /* width: 100%; */
+}
+.personal-details-label{
+    font-size: 20x;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.personal-details-value{
+    font-size: 15px;
+}
+.personal-preview-flex-div{
+    display: flex;
+}
+.personal-preview-flex-div div {
+    /* display: flex; */
+    width: 100%;
+}
+.preview-college-name{
+    visibility: hidden;
+    /* display: none; */
+}
+
+.preview-college-name1{
+    /* visibility: hidden; */
+    display: block;
+}

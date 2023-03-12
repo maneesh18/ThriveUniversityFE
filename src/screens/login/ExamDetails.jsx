@@ -10,6 +10,8 @@ import { AiOutlinePlus, AiOutlineDown } from "react-icons/ai";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
+import ApplicationBottom from "./ApplicationBottom";
+
 const imageMimeType = /image\/(png|jpg|jpeg)/i;
 
 const ExamDetails = (props) => {
@@ -25,7 +27,27 @@ const ExamDetails = (props) => {
     });
     props.nextStep();
   };
+  const handleOnContinue =()=>{
+    props.setFormData({
+        ...props.formData,
+        exam_details: props.scoreformFields,
+      });
+      console.log("Called from bottom ui");
+  }
 
+//   window.onscroll = function () {
+//     let myNav = document.getElementById("nav");
+//     if (
+//       document.body.scrollTop >= 200 ||
+//       document.documentElement.scrollTop >= 200
+//     ) {
+//       myNav.classList.add("top-navbar-scroll");
+//       myNav.classList.remove("top-navbar");
+//     } else {
+//       myNav.classList.add("top-navbar");
+//       myNav.classList.remove("top-navbar-scroll");
+//     }
+//   };
   const downloadPdfDocument = () => {
     const input = document.getElementById("exam-details");
     html2canvas(input).then((canvas) => {
@@ -46,6 +68,8 @@ const ExamDetails = (props) => {
       return;
     }
     setFile(file);
+    
+    console.log("Inside change Handler",fileDataURL)
   };
   useEffect(() => {
     let fileReader,
@@ -58,6 +82,7 @@ const ExamDetails = (props) => {
           setFileDataURL(result);
         }
       };
+      console.log("Inside use effect",fileDataURL)
       fileReader.readAsDataURL(file);
     }
     return () => {
@@ -69,148 +94,154 @@ const ExamDetails = (props) => {
   }, [file]);
 
   return (
-    <div id="exam-details">
-      <div className="login-background-img">
-        <img
-          className="login-bgimage-img"
-          src="https://media.istockphoto.com/id/1012049016/photo/young-man-writing-college-or-university-application-form-with-pen-and-paper-student-applying.jpg?s=612x612&w=is&k=20&c=0ucIgjGmrBOgxsooJ7ms5xtTK14OpITO3U_Fzf6VRNA="
-          alt="home"
-        />
-      </div>
-
       <div className="study_details-content">
-        <div className="study-details-education-div" style={{ width: "50%" }}>
-          <div className="details-header-div" onClick={props.addScoreFields}>
-            <p>
-              <AiOutlinePlus
-                size="1.5em"
-                style={{ position: "relative", bottom: "2px" }}
-              />{" "}
-              Add Education Experience
-            </p>
+        <div className="study_details_wrapper">
+          <div className="heading-font wrapper-1">
+            EXAM<div> DETAILS</div>
           </div>
-
-          <form onSubmit={props.submit} className="study-details-form">
-            {props.scoreformFields.map((form, index) => {
-              console.log("Education updated", props.openScore, index);
-              return index + 1 == props.openScore ? (
-                <div key={index + 1} className="single-content-parent-div">
-                  <div className="single-content-vertical-div">
-                    <div style={{ width: "45%" }}>
-                      <div style={{ marginBottom: "10px" }}>
-                        <label style={{ marginBottom: "10px" }}>Score</label>
-                        <input
-                          name="score"
-                          placeholder="Score.."
-                          onChange={(event) =>
-                            props.handleScoreFormChange(event, index)
-                          }
-                          value={form.score}
-                          className="form-control"
-                        />
-                      </div>
-                      <div>
-                        <label style={{ marginBottom: "10px" }}>
-                          Additional Data
-                        </label>
-                        <input
-                          name="additional_data"
-                          placeholder="addtional info"
-                          onChange={(event) =>
-                            props.handleScoreFormChange(event, index)
-                          }
-                          value={form.additional_data}
-                          className="form-control"
-                        />
-                      </div>
-                    </div>
-
-                    <div style={{ width: "45%" }}>
-                      <div style={{ marginBottom: "10px" }}>
-                        <label style={{ marginBottom: "10px" }}>
-                          Upload Score
-                        </label>
-                        <input
-                          name="file"
-                          placeholder="Upload"
-                        //   onChange={(event) => {
-                        //     changeHandler();
-                        //     props.handleScoreFormChange(event, index);
-                        //   }}
-                          type="file"
-                          id="image"
-                          accept=".png, .jpg, .jpeg"
-                          onChange={changeHandler}
-                          value={form.upload_score}
-                          className="form-control"
-                        />
-                      </div>
-                      <div>
-                        <label style={{ marginBottom: "10px" }}>
-                          Exam Name
-                        </label>
-                        <div>
-                          <select
-                            style={{
-                              width: "100%",
-                              height: "40px",
-                              borderRadius: "8px",
-                              paddingLeft: "10px",
-                            }}
-                            onChange={(event) =>
-                              props.handleScoreFormChange(event, index)
-                            }
-                            name="exam_name"
-                          >
-                            <option>Choose...</option>
-                            <option>GRE</option>
-                            <option>IELTS</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div style={{ display: "flex" }}>
-                    <MdOutlineDelete
-                      size="2em"
-                      onClick={() => props.removeScoreFields(index)}
-                      style={{ margin: "0px auto", cursor: "pointer" }}
-                    />
-                  </div>
-                </div>
-              ) : (
-                //   <Button color="primary" onClick={()=> setOpenEducation(index+1)}>
-                //   Education{index+1}
-                // </Button>
+          <div className="details-parent-div">
+            <div>
+              <div className="study-details-education-div">
                 <div
                   className="details-header-div"
-                  onClick={() => props.setOpenScore(index + 1)}
+                  onClick={props.addScoreFields}
                 >
                   <p>
-                    Education {index + 1}
-                    <AiOutlineDown
-                      size="0.9em"
+                    <AiOutlinePlus
+                      size="1.5em"
                       style={{ position: "relative", bottom: "2px" }}
                     />{" "}
+                    Add Exam Details
                   </p>
                 </div>
-              );
-            })}
-          </form>
-        </div>
-        {fileDataURL ? (
-          <p className="img-preview-wrapper">
-            {<img src={fileDataURL} alt="preview" />}
-          </p>
-        ) : null}
-        <Button color="warning" onClick={back}>
-          Back
-        </Button>
 
-        <Button color="primary" onClick={continuePage}>
-          Continue
-        </Button>
-      </div>
+                <form onSubmit={props.submit} className="study-details-form">
+                  {props.scoreformFields.map((form, index) => {
+                    console.log("Education updated", props.openScore, index);
+                    return index + 1 == props.openScore ? (
+                      <div
+                        key={index + 1}
+                        className="single-content-parent-div"
+                      >
+                        <div className="side-heading" style={{fontSize:"20px"}}>
+                      Exam Details {index+1}
+                    </div>
+                        <div className="single-content-vertical-div">
+                          <div>
+                            <div  className="input-element-div">
+                              <label style={{ marginBottom: "10px" }}>
+                                Score
+                              </label>
+                              <input
+                                name="score"
+                                placeholder="Score.."
+                                onChange={(event) =>
+                                  props.handleScoreFormChange(event, index)
+                                }
+                                value={form.score}
+                                className="form-control"
+                              />
+                            </div>
+                            <div  className="input-element-div">
+                              <label style={{ marginBottom: "10px" }}>
+                                Additional Data
+                              </label>
+                              <input
+                                name="additional_data"
+                                placeholder="addtional info"
+                                onChange={(event) =>
+                                  props.handleScoreFormChange(event, index)
+                                }
+                                value={form.additional_data}
+                                className="form-control"
+                              />
+                            </div>
+                          </div>
+
+                          <div >
+                            <div  className="input-element-div">
+                              <label style={{ marginBottom: "10px" }}>
+                                Upload Score
+                              </label>
+                              <input
+                                name="upload_score"
+                                placeholder="Upload"
+                                  onChange={(event) => {
+                                    changeHandler(event);
+                                    props.handleScoreFormChange(event, index);
+                                  }}
+                                type="file"
+                                // id="image"
+                                
+                                accept=".png, .jpg, .jpeg"
+                                value={form.upload_score}
+                                className="form-control"
+                              />
+                            </div>
+                            <div  className="input-element-div">
+                              <label style={{ marginBottom: "10px" }}>
+                                Exam Name
+                              </label>
+                                <select
+                                  onChange={(event) =>
+                                    props.handleScoreFormChange(event, index)
+                                  }
+                                  name="exam_name"
+                                  className="form-control"
+                                >
+                                  <option>Choose...</option>
+                                  <option>GRE</option>
+                                  <option>IELTS</option>
+                                </select>
+                        
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div style={{ }} className="delete-button"onClick={() =>  props.removeScoreFields(index)}>
+                    <div style={{fontSize:"18px"}}> Delete</div> <MdOutlineDelete
+                        size="1.5em"
+                        
+                        style={{  }}
+                      />
+                    </div>
+                    {form.upload_score!="" ? (
+                <p className="img-preview-wrapper">
+                  {<img src={form.upload_score} alt="preview" />}
+                </p>
+              ) : <div>akjwndkjwad</div>}
+                      </div>
+                    ) : (
+                      <div className="side-heading header-div ">
+                        <div
+                          className="details-wrapper-1"
+                          onClick={() => props.setOpenScore(index + 1)}
+                        >
+                          Exam Details {index + 1}
+                        </div>
+                        <div
+                          className="delete-icon-div"
+                          onClick={() => props.removeScoreFields(index)}
+                        >
+                          <MdOutlineDelete
+                            size="1.5em"
+                            onClick={() => props.removeFields(index)}
+                            style={{}}
+                          />
+                        </div>
+                      
+                      </div>
+
+                    );
+                  })}
+                </form>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+
+      <ApplicationBottom nextStep={props.nextStep} prevStep={props.prevStep} onContinue={handleOnContinue} formData={props.formData}/>
     </div>
   );
 };
