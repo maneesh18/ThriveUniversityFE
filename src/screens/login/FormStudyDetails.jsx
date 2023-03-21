@@ -16,7 +16,7 @@ const FormStudyDetails = (props) => {
     props.setFormData({
       ...props.formData,
       employment_status: props.workExpformFields,
-      eduction:props.formFields
+      education:props.formFields
     });
     props.nextStep();
     console.log("Education Form details", props.formData);
@@ -25,7 +25,7 @@ const FormStudyDetails = (props) => {
     props.setFormData({
       ...props.formData,
       employment_status: props.workExpformFields,
-      eduction:props.formFields
+      education:props.formFields
     });
   }
   useEffect(()=>{
@@ -95,11 +95,14 @@ const FormStudyDetails = (props) => {
                           <input
                             name="file"
                             placeholder="Upload"
-                            onChange={(event) => props.handleFormChange(event, index)}
-                            value=""
+                            onChange={(event) =>{
+                               props.handleFormFileUploads(event, index,props.trackingId+"study"+index);
+                            }
+                          }
                             className="form-control"
                             type="file"
                           />
+                          <p>{form.file == null ? null: form.file["name"]}</p>
                         </div>
                         <div className="input-element-div">
                           <label style={{ marginBottom: "10px" }}>
@@ -113,9 +116,8 @@ const FormStudyDetails = (props) => {
                               className="form-control"
                             >
                               <option>{form.level_of_education != "" ? form.level_of_education : "Choose.."}</option>
-                              <option>Algorithm</option>
-                              <option>Language</option>
-                              <option>Data Structure</option>
+                              <option>UG</option>
+                              <option>Masters</option>
                             </select>
                           
                         </div>

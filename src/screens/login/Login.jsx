@@ -11,9 +11,13 @@ export default function Login () {
   const [showPassword,setShowPassword]=useState("password");
  function handleLogin(e){
   e.preventDefault();
-  axios.get(
-      LocalDomain+"/login/result")
-      .then((json) => console.log("Api result",json));
+  axios.post(
+      LocalDomain+"/login",{
+        'email':'abc@gmail.com',
+        'password':'187261872681'
+      })
+      .then((json) => console.log("Api result",json))
+      .catch((err)=> console.log("Err",err));
     
   }
   const togglePassword =()=>{
@@ -83,7 +87,7 @@ export default function Login () {
           </button>
         
         
-          <button type="submit" className="btn btn-primary public-btn" style={{margin:"0px auto"}} >
+          <button type="submit" className="btn btn-primary public-btn" style={{margin:"0px auto"}} onClick={()=>{}}>
           Track Application
           </button>
       

@@ -96,7 +96,7 @@ const ExamDetails = (props) => {
   return (
       <div className="study_details-content">
         <div className="study_details_wrapper">
-          <div className="heading-font wrapper-1">
+          <div className="heading-font wrapper-1 prof-wrapper-1">
             EXAM<div> DETAILS</div>
           </div>
           <div className="details-parent-div">
@@ -166,17 +166,14 @@ const ExamDetails = (props) => {
                               <input
                                 name="upload_score"
                                 placeholder="Upload"
-                                  onChange={(event) => {
-                                    changeHandler(event);
-                                    props.handleScoreFormChange(event, index);
-                                  }}
+                                
+                            onChange={(event)=> props.handleScoreFormFileUploads(event, index,props.trackingId+"exam"+index)}
                                 type="file"
                                 // id="image"
-                                
-                                accept=".png, .jpg, .jpeg"
-                                value={form.upload_score}
+                                // value={form.upload_score == null ? "":form.upload_score['name']}
                                 className="form-control"
                               />
+                              <p>{form.upload_score == null ? null:form.upload_score["name"]}</p>
                             </div>
                             <div  className="input-element-div">
                               <label style={{ marginBottom: "10px" }}>
@@ -189,7 +186,8 @@ const ExamDetails = (props) => {
                                   name="exam_name"
                                   className="form-control"
                                 >
-                                  <option>Choose...</option>
+                                    <option>{form.exam_name != "" ? form.exam_name : "Choose.."}</option>
+              
                                   <option>GRE</option>
                                   <option>IELTS</option>
                                 </select>

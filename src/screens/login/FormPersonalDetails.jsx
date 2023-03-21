@@ -23,6 +23,9 @@ const FormPersonalDetails = (props) => {
     e.preventDefault();
     props.nextStep();
   };
+  useState(()=>{
+    console.log("Inside form personal details",props.trackingId); 
+  },[])
 
   return (
     <div className="personal-details-page">

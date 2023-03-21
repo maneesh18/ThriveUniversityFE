@@ -12,6 +12,22 @@ const ApplicationDetails = (props) => {
     e.preventDefault();
     props.nextStep();
   };
+  const handleContinue=(e)=>{
+    console.log("Integer is ",Number.MAX_SAFE_INTEGER);
+    props.setTrackingId(generateUniqueString);
+  }
+  function generateUniqueString() {
+    var ts = String(new Date().getTime()),
+        i = 0,
+        out = '';
+
+    for (i = 0; i < ts.length; i += 2) {
+        out += Number(ts.substr(i, 2)).toString(36);
+    }
+
+    return ('trackId' + out);
+}
+
   return (
     <div className="application-details">
       <div className="application-content-wrapper">
@@ -166,7 +182,7 @@ const ApplicationDetails = (props) => {
           </tfoot>
         </table>
       </div>
-      <ApplicationBottom nextStep={props.nextStep} prevStep={props.prevStep} onContinue={()=>{}} formData={props.formData} />
+      <ApplicationBottom nextStep={props.nextStep} prevStep={props.prevStep} onContinue={()=>{handleContinue()}} formData={props.formData} />
     </div>
   );
 };

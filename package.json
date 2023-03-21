@@ -11,6 +11,7 @@
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "mdb-react-ui-kit": "^5.1.0",
+    "pdf-lib": "^1.17.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-calendar": "^4.0.0",

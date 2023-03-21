@@ -1,6 +1,15 @@
 .preview-header{
     font-size: 30px;
 }
+.preview-subheader{
+    padding-left: 10px;
+    font-weight: 400;
+    font-size: 25px;
+}
+#preview-details{
+    padding: 10px;
+    padding-top: 40px;
+}
 .personal-details-body{
     padding: 10px;
     /* width: 100%; */
@@ -28,4 +37,12 @@
 .preview-college-name1{
     /* visibility: hidden; */
     display: block;
+}
+
+@media only screen and (max-width: 768px) {
+    
+.personal-preview-flex-div{
+    display: block;
+    width: 100%;
+}
 }

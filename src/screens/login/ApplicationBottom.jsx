@@ -1,6 +1,7 @@
 import React from "react"
 
 import {AiOutlineArrowRight,AiOutlineArrowLeft} from 'react-icons/ai';
+import './application_details.css';
 const ApplicationBottom = (props) => {
     const back = (e) => {
         e.preventDefault();

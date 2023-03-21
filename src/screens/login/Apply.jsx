@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import FormPersonalDetails from "./FormPersonalDetails";
 import FormStudyDetails from "./FormStudyDetails";
 import ExamDetails from "./ExamDetails";
@@ -27,17 +27,16 @@ const Apply = (props) => {
     department: "",
     course: "",
     address: "",
-    level_of_education:"",
+    level_of_education: "",
     employment_status: null,
     education: null,
-    exam_details:null,
+    exam_details: null,
   });
-
 
   const [departmentIndex, setDepartmentIndex] = useState(-1);
 
   const [formFields, setFormFields] = useState([
-    { college_name: "", gpa: "", file: null, level_of_education: "" },
+    { college_name: "", gpa: "", file: null, level_of_education: ""},
   ]);
   const [workExpformFields, setWorkExpFormFields] = useState([
     {
@@ -45,18 +44,23 @@ const Apply = (props) => {
       start_date: "",
       description: "",
       end_date: "",
-      location: "",
       designation: "",
     },
   ]);
 
-  const handleFormChange = (event, index) => {
+  const handleFormChange = (event, index,TID) => {
     let data = [...formFields];
     data[index][event.target.name] = event.target.value;
     setFormFields(data);
-    console.log("Hello123");
+    console.log("Inside handle form change",event.target.name);
   };
-
+  const handleFormFileUploads =(event,index,name)=>{
+    let data = [...formFields];
+    console.log("Inside");
+    console.log("Name is ",name)
+    data[index][event.target.name] = event.target.files[0];
+    setFormFields(data);
+  }
   const submit = (e) => {
     e.preventDefault();
     console.log(formFields);
@@ -96,7 +100,6 @@ const Apply = (props) => {
       start_date: "",
       description: "",
       end_date: "",
-      location: "",
       designation: "",
     };
 
@@ -113,60 +116,65 @@ const Apply = (props) => {
   const [openEducation, setOpenEducation] = useState(1);
   const [openWork, setOpenWork] = useState(1);
 
-//end the work details screen state management
+  //end the work details screen state management
 
+  const [scoreformFields, setScoreFormFields] = useState([
+    {
+      exam_name: "",
+      score: "",
+      additional_data: "",
+      upload_score: null,
+    },
+  ]);
 
-      
-const [scoreformFields, setScoreFormFields] = useState([
-  {
-    exam_name: "",
-    score: "",
-    additional_data: "",
-    upload_score: "",
-  },
-]);
-    
-const removeScoreFields = (index) => {
-  let data = [...scoreformFields];
-  data.splice(index, 1);
-  setScoreFormFields(data);
-};
+  const removeScoreFields = (index) => {
+    let data = [...scoreformFields];
+    data.splice(index, 1);
+    setScoreFormFields(data);
+  };
 
-const handleScoreFormChange = (event, index) => {
-  let data = [...scoreformFields];
-  data[index][event.target.name] = event.target.value;
-  setScoreFormFields(data);
-  console.log("Hello123");
-};
+  const handleScoreFormChange = (event, index) => {
+    let data = [...scoreformFields];
+    data[index][event.target.name] = event.target.value;
+    setScoreFormFields(data);
+    console.log("Hello123");
+  };
 
-const addScoreFields = () => {
-  let object = {
+  const handleScoreFormFileUploads =(event,index,name)=>{
+    let data = [...scoreformFields];
+    console.log("Inside");
+    console.log("Name is ",name)
+    data[index][event.target.name] = event.target.files[0];
+    setScoreFormFields(data);
+  }
+  const addScoreFields = () => {
+    let object = {
       exam_name: "",
       score: "",
       additional_data: "",
       upload_score: "",
+    };
+
+    setScoreFormFields([...scoreformFields, object]);
+    setOpenScore(openScore + 1);
   };
 
-  setScoreFormFields([...scoreformFields, object]);
-  setOpenScore(openScore + 1);
-};
+  const [openScore, setOpenScore] = useState(1);
 
+  useEffect(() => {
+    console.log("Do something after counter has changed", formData);
+  }, [formData]);
 
-
-const [openScore, setOpenScore] = useState(1);
-
-useEffect(() => {
-  console.log('Do something after counter has changed', formData);
-}, [formData]);
-
-
+  const [trackingId, setTrackingId] = useState("");
   switch (step) {
     case 0:
-      return(
-        <ApplicationDetails 
-        nextStep={nextStep}
-        prevStep={prevStep}/>
-        )
+      return (
+        <ApplicationDetails
+          nextStep={nextStep}
+          prevStep={prevStep}
+          setTrackingId={setTrackingId}
+        />
+      );
     case 1:
       return (
         <FormPersonalDetails
@@ -176,6 +184,7 @@ useEffect(() => {
           setFormData={setFormData}
           departmentIndex={departmentIndex}
           setDepartmentIndex={setDepartmentIndex}
+          trackingId={trackingId}
           //   values={values}
         />
       );
@@ -201,6 +210,8 @@ useEffect(() => {
           openWork={openWork}
           setOpenWork={setOpenWork}
           submit={submit}
+          trackingId={trackingId}
+          handleFormFileUploads={handleFormFileUploads}
           //   values={values}
         />
       );
@@ -218,11 +229,19 @@ useEffect(() => {
           handleScoreFormChange={handleScoreFormChange}
           openScore={openScore}
           setOpenScore={setOpenScore}
+          trackingId={trackingId}
+          handleScoreFormFileUploads={handleScoreFormFileUploads}
         />
       );
     case 4:
-      return <PreviewDetails nextStep={nextStep} prevStep={prevStep} 
-      formData={formData} />;
+      return (
+        <PreviewDetails
+          nextStep={nextStep}
+          prevStep={prevStep}
+          formData={formData}
+          trackingId={trackingId}
+        />
+      );
     default:
       console.log("This is a multi-step form built with React.");
   }
