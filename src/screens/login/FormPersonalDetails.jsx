@@ -8,6 +8,7 @@ import {
   COURSE_LIST,
   LEVEL_OF_EDUCATION_LIST,
 } from "../academics/AcademicConstants";
+import ProgressStep from "./ProgressStep";
 //level of education
 //address
 //dept
@@ -23,12 +24,10 @@ const FormPersonalDetails = (props) => {
     e.preventDefault();
     props.nextStep();
   };
-  useState(()=>{
-    console.log("Inside form personal details",props.trackingId); 
-  },[])
 
   return (
     <div className="personal-details-page">
+      <ProgressStep></ProgressStep>
       <div className="personal-details-content">
         <div className="heading-font wrapper-1">
           PERSONAL<div> DETAILS</div>

@@ -96,7 +96,7 @@ const FormStudyDetails = (props) => {
                             name="file"
                             placeholder="Upload"
                             onChange={(event) =>{
-                               props.handleFormFileUploads(event, index,props.trackingId+"study"+index);
+                               props.handleFormFileUploads(event, index);
                             }
                           }
                             className="form-control"

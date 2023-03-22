@@ -167,7 +167,7 @@ const ExamDetails = (props) => {
                                 name="upload_score"
                                 placeholder="Upload"
                                 
-                            onChange={(event)=> props.handleScoreFormFileUploads(event, index,props.trackingId+"exam"+index)}
+                            onChange={(event)=> props.handleScoreFormFileUploads(event, index)}
                                 type="file"
                                 // id="image"
                                 // value={form.upload_score == null ? "":form.upload_score['name']}

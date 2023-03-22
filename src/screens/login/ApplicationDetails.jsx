@@ -2,6 +2,7 @@ import React from "react";
 import "./application_details.css";
 import "../../styles.css";
 import ApplicationBottom from "./ApplicationBottom";
+import ProgressStep from "./ProgressStep";
 const ApplicationDetails = (props) => {
   const back = (e) => {
     e.preventDefault();
@@ -14,7 +15,6 @@ const ApplicationDetails = (props) => {
   };
   const handleContinue=(e)=>{
     console.log("Integer is ",Number.MAX_SAFE_INTEGER);
-    props.setTrackingId(generateUniqueString);
   }
   function generateUniqueString() {
     var ts = String(new Date().getTime()),
@@ -29,12 +29,14 @@ const ApplicationDetails = (props) => {
 }
 
   return (
-    <div className="application-details">
+    <div className="application-details" style={{paddingTop:"100px"}}>
+    <ProgressStep></ProgressStep>
       <div className="application-content-wrapper">
         <div className="heading-font wrapper-1">
           APPLICATION<div> GUIDELINES</div>
         </div>
         <div className="wrapper-2">
+          
           <div>
             <div className="side-heading">
               Thrive University admission requirements

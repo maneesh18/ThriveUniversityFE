@@ -1,23 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./apply_styles.css";
 import "./login_styles.css";
 import { Button } from "react-bootstrap";
 import "./preview_details.css";
 import CommonPreviewLabelValue from "./CommonPreviewLabelValue";
-
 import html2canvas from "html2canvas";
-
 import JsPDF from 'jspdf';
+import OverLayLoader from "./OverLayLoader";
+import axios from "axios";
+import { MOckLocalDomain } from "../../api_labels";
 const PreviewDetails = (props) => {
+
+  const [continueClicked,setContinueClicked]=useState(false);
   const back = (e) => {
     e.preventDefault();
     props.prevStep();
   };
   const continuePage = (e) => {
     e.preventDefault();
-    download();
+    // props.nextStep();
+    setContinueClicked(true);
+    callFormSubmitAPi();
     console.log("Education Form details", props.formData);
   };
+  const callFormSubmitAPi=()=>{
+    axios.post(
+      MOckLocalDomain+"/apply",{
+        'form_data':props.formData
+      })
+      .then((json) => {
+        console.log("Api result",json.data);
+        props.setApiResult(json.data);
+        props.nextStep();
+      })
+      .catch((err)=> console.log("Err",err));
+  }
   const downloadPdfDocument = () => {
     document.getElementById("logo-name").style.visibility = "visible";
     document.getElementById("logo-name").style.marginBottom = "15px";
@@ -289,7 +306,8 @@ const PreviewDetails = (props) => {
       <Button color="primary" onClick={continuePage}>
         Continue
       </Button>
-
+      
+      <OverLayLoader active={continueClicked}></OverLayLoader>
     </div>
   );
 };

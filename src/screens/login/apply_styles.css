@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300&display=swap");
+@import "rsuite/dist/rsuite.css";
+
 .personal-details-page {
   padding: 80px;
   background-color: #accdc2;
