@@ -13,30 +13,29 @@ const ApplicationDetails = (props) => {
     e.preventDefault();
     props.nextStep();
   };
-  const handleContinue=(e)=>{
-    console.log("Integer is ",Number.MAX_SAFE_INTEGER);
-  }
+  const handleContinue = (e) => {
+    console.log("Integer is ", Number.MAX_SAFE_INTEGER);
+  };
   function generateUniqueString() {
     var ts = String(new Date().getTime()),
-        i = 0,
-        out = '';
+      i = 0,
+      out = "";
 
     for (i = 0; i < ts.length; i += 2) {
-        out += Number(ts.substr(i, 2)).toString(36);
+      out += Number(ts.substr(i, 2)).toString(36);
     }
 
-    return ('trackId' + out);
-}
+    return "trackId" + out;
+  }
 
   return (
-    <div className="application-details" style={{paddingTop:"100px"}}>
-    <ProgressStep></ProgressStep>
+    <div className="application-details">
+      <ProgressStep step={props.step}></ProgressStep>
       <div className="application-content-wrapper">
         <div className="heading-font wrapper-1">
           APPLICATION<div> GUIDELINES</div>
         </div>
         <div className="wrapper-2">
-          
           <div>
             <div className="side-heading">
               Thrive University admission requirements
@@ -184,7 +183,14 @@ const ApplicationDetails = (props) => {
           </tfoot>
         </table>
       </div>
-      <ApplicationBottom nextStep={props.nextStep} prevStep={props.prevStep} onContinue={()=>{handleContinue()}} formData={props.formData} />
+      <ApplicationBottom
+        nextStep={props.nextStep}
+        prevStep={props.prevStep}
+        onContinue={() => {
+          handleContinue();
+        }}
+        formData={props.formData}
+      />
     </div>
   );
 };

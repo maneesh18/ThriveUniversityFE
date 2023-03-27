@@ -178,7 +178,13 @@ const Apply = (props) => {
   function renderUi(step) {
     switch (step) {
       case 0:
-        return <ApplicationDetails nextStep={nextStep} prevStep={prevStep} />;
+        return (
+          <ApplicationDetails
+            nextStep={nextStep}
+            prevStep={prevStep}
+            step={step}
+          />
+        );
       case 1:
         return (
           <FormPersonalDetails
@@ -188,6 +194,7 @@ const Apply = (props) => {
             setFormData={setFormData}
             departmentIndex={departmentIndex}
             setDepartmentIndex={setDepartmentIndex}
+            step={step}
           />
         );
       case 2:
@@ -213,6 +220,7 @@ const Apply = (props) => {
             setOpenWork={setOpenWork}
             submit={submit}
             handleFormFileUploads={handleFormFileUploads}
+            step={step}
           />
         );
       case 3:
@@ -230,6 +238,7 @@ const Apply = (props) => {
             openScore={openScore}
             setOpenScore={setOpenScore}
             handleScoreFormFileUploads={handleScoreFormFileUploads}
+            step={step}
           />
         );
       case 4:
@@ -239,6 +248,7 @@ const Apply = (props) => {
             prevStep={prevStep}
             formData={formData}
             setApiResult={setApiResult}
+            step={step}
           />
         );
       case 5:
@@ -247,10 +257,6 @@ const Apply = (props) => {
         console.log("This is a multi-step form built with React.");
     }
   }
-  return (
-    <div>
-      {renderUi(step)}
-    </div>
-  );
+  return <div>{renderUi(step)}</div>;
 };
 export default Apply;

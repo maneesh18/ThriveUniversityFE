@@ -5,36 +5,58 @@ import { Button } from "react-bootstrap";
 import "./preview_details.css";
 import CommonPreviewLabelValue from "./CommonPreviewLabelValue";
 import html2canvas from "html2canvas";
-import JsPDF from 'jspdf';
+import JsPDF from "jspdf";
 import OverLayLoader from "./OverLayLoader";
 import axios from "axios";
 import { MOckLocalDomain } from "../../api_labels";
-const PreviewDetails = (props) => {
+import ProgressStep from "./ProgressStep";
 
-  const [continueClicked,setContinueClicked]=useState(false);
+const PreviewDetails = (props) => {
+  const [continueClicked, setContinueClicked] = useState(false);
   const back = (e) => {
     e.preventDefault();
     props.prevStep();
   };
-  const continuePage = (e) => {
+  const continuePage = async (e) => {
     e.preventDefault();
     // props.nextStep();
+   
     setContinueClicked(true);
-    callFormSubmitAPi();
+    callFormSubmitAPi(await fillFormData(props.formData));
     console.log("Education Form details", props.formData);
   };
-  const callFormSubmitAPi=()=>{
-    axios.post(
-      MOckLocalDomain+"/apply",{
-        'form_data':props.formData
+  function fillFormData(formData){
+    let forms = new FormData();
+    forms.append("full_name",formData.full_name);
+    forms.append("father_name",formData.father_name);
+    forms.append("mother_name",formData.mother_name);
+    forms.append("mobile_number",formData.mobile_number);
+    forms.append("date_of_birth",formData.date_of_birth);
+    forms.append("email",formData.email);
+    forms.append("department",formData.department);
+    forms.append("course",formData.course);
+    forms.append("address",formData.address);
+    forms.append("level_of_education",formData.level_of_education);
+    console.log("Form Data is ",forms);
+    for (var pair of forms.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]); 
+  }
+    // forms.append("file", document.getElementById("file").files[0]);
+    return forms;
+  }
+  const callFormSubmitAPi = (forms) => {
+    console.log("Inside api integration")
+    axios
+      .post(MOckLocalDomain + "/apply", {
+        form_data: forms,
       })
       .then((json) => {
-        console.log("Api result",json.data);
+        console.log("Api result", json.data);
         props.setApiResult(json.data);
         props.nextStep();
       })
-      .catch((err)=> console.log("Err",err));
-  }
+      .catch((err) => console.log("Err", err));
+  };
   const downloadPdfDocument = () => {
     document.getElementById("logo-name").style.visibility = "visible";
     document.getElementById("logo-name").style.marginBottom = "15px";
@@ -52,35 +74,35 @@ const PreviewDetails = (props) => {
     document.getElementById("logo-name").style.visibility = "hidden";
     document.getElementById("logo-name").style.marginBottom = "0px";
   };
-  
+
   const download = () => {
     window.scrollTo(0, 0);
     setTimeout(() => {
-        // setTimeout(() => {
-        //     setLoader(true);
-        // }, 100);
-        const divToPrint =  document.getElementById("preview-details");
-        html2canvas(divToPrint).then(canvas => {
-            const imgData = canvas.toDataURL('image/png',0.1);
-            const imgWidth = 190;
-            const pageHeight = 290;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            let heightLeft = imgHeight;
-            const doc = new JsPDF('pt', 'mm');
-            let position = 0;
-            doc.addImage(imgData, 'PNG', 10, 0, imgWidth, imgHeight + 25);
-            heightLeft -= pageHeight;
-            while (heightLeft >= 0) {
-                position = heightLeft - imgHeight;
-                doc.addPage();
-                doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight + 25);
-                heightLeft -= pageHeight;
-            }
-            doc.save('download.pdf');
-            // setLoader(false);
-        });
+      // setTimeout(() => {
+      //     setLoader(true);
+      // }, 100);
+      const divToPrint = document.getElementById("preview-details");
+      html2canvas(divToPrint).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png", 0.1);
+        const imgWidth = 190;
+        const pageHeight = 290;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        let heightLeft = imgHeight;
+        const doc = new JsPDF("pt", "mm");
+        let position = 0;
+        doc.addImage(imgData, "PNG", 10, 0, imgWidth, imgHeight + 25);
+        heightLeft -= pageHeight;
+        while (heightLeft >= 0) {
+          position = heightLeft - imgHeight;
+          doc.addPage();
+          doc.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight + 25);
+          heightLeft -= pageHeight;
+        }
+        doc.save("download.pdf");
+        // setLoader(false);
+      });
     }, 1000);
-};
+  };
 
   useEffect(() => {
     let myNav = document.getElementById("nav");
@@ -93,30 +115,30 @@ const PreviewDetails = (props) => {
     myNav.classList.add("top-navbar-scroll");
   };
 
-  async function getImgData(files,index) {
+  async function getImgData(files, index) {
     // const imgPreview = document.getElementById("img-preview");
     // const files = chooseFile.files[0];
     console.log("Inside here", files);
     if (files) {
       const fileReader = new FileReader();
-       fileReader.readAsDataURL(files);
-       let file;
-       await fileReader.addEventListener("load",async function () {
-        console.log("Inside on load",this.result);
+      fileReader.readAsDataURL(files);
+      let file;
+      await fileReader.addEventListener("load", async function () {
+        console.log("Inside on load", this.result);
         // imgPreview.style.display = "block";
         // imgPreview.width = "90%";
-        file= this.result;
-        document.getElementById("img-preview"+index).src=this.result
+        file = this.result;
+        document.getElementById("img-preview" + index).src = this.result;
         // imgPreview.innerHTML = '<img width="90%" src="' + this.result + '" />';
       });
-       console.log("Result  byte data",file);
-       return  file;
-      
+      console.log("Result  byte data", file);
+      return file;
     }
   }
 
   return (
     <div id="preview-details">
+      <ProgressStep step={props.step}></ProgressStep>
       <div className="preview-college-name" id="logo-name">
         <img
           alt="logo"
@@ -204,13 +226,18 @@ const PreviewDetails = (props) => {
                   ></CommonPreviewLabelValue>
                 </div>
               </div>
-                 
-                 {form.file ? (
-                <div style={{width:"80%",}}>
-                  <img style={{objectFit:"contain",width:"100%"}} id={"img-preview-study-"+index} src={getImgData(form.file,"-study-"+index)} alt="preview" />
-                  </div>
-                // </p>
-              ) : null}
+
+              {form.file ? (
+                <div style={{ width: "80%" }}>
+                  <img
+                    style={{ objectFit: "contain", width: "100%" }}
+                    id={"img-preview-study-" + index}
+                    src={getImgData(form.file, "-study-" + index)}
+                    alt="preview"
+                  />
+                </div>
+              ) : // </p>
+              null}
             </div>
           );
         })}
@@ -289,11 +316,16 @@ const PreviewDetails = (props) => {
                   ></CommonPreviewLabelValue>
                 </div>
               </div>
-              
+
               {form.upload_score ? (
-                <div style={{width:"80%",}}>
-                  <img style={{objectFit:"contain",width:"100%"}} id={"img-preview-exam-"+index} src={getImgData(form.upload_score,"-exam-"+index)} alt="preview" />
-                  </div>
+                <div style={{ width: "80%" }}>
+                  <img
+                    style={{ objectFit: "contain", width: "100%" }}
+                    id={"img-preview-exam-" + index}
+                    src={getImgData(form.upload_score, "-exam-" + index)}
+                    alt="preview"
+                  />
+                </div>
               ) : null}
             </div>
           );
@@ -306,7 +338,7 @@ const PreviewDetails = (props) => {
       <Button color="primary" onClick={continuePage}>
         Continue
       </Button>
-      
+
       <OverLayLoader active={continueClicked}></OverLayLoader>
     </div>
   );

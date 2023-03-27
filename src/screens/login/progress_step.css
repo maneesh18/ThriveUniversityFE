@@ -1,0 +1,21 @@
+.step-header{
+    display: flex;
+     align-items: center;
+     padding-top:10px;
+     width: 50%;
+     margin-bottom: 30px;
+}
+.step-container{
+    display:flex;
+    justify-content:end;
+}
+
+@media only screen and (max-width: 768px) {
+    .step-header{
+         padding-top:60px;
+         width: 70%;
+    }
+.step-container{
+    justify-content:center;
+}
+}
