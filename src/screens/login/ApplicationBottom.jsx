@@ -7,10 +7,10 @@ const ApplicationBottom = (props) => {
     e.preventDefault();
     props.prevStep();
   };
-  const continuePage = (e) => {
+  const continuePage = async (e) => {
     console.log("Clicked the continue button");
-    // e.preventDefault();
-    props.onContinue();
+    e.preventDefault();
+    await props.onContinue();
     console.log("FORM DAta is ", props.formData);
     props.nextStep();
   };
@@ -21,7 +21,7 @@ const ApplicationBottom = (props) => {
           <AiOutlineArrowLeft size="1em" />
           <span style={{ paddingLeft: "5px" }}>Back</span>
         </button>
-        <button type="submit" id="continue" onClick={continuePage}>
+        <button type="button" id="continue" onClick={continuePage} disabled={props.disableContinueButton}>
           <span style={{ paddingRight: "5px" }}>Continue</span>{" "}
           <AiOutlineArrowRight />
         </button>

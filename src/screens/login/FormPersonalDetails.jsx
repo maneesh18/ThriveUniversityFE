@@ -9,120 +9,62 @@ import {
   LEVEL_OF_EDUCATION_LIST,
 } from "../academics/AcademicConstants";
 import ProgressStep from "./ProgressStep";
-//level of education
-//address
-//dept
-//courses
+import { PersonalFormvalidateFields } from "./Validations";
 
 const FormPersonalDetails = (props) => {
+  const handleFormValidationValues = (e) => {
+    console.log("Invalid email data", props.formData.email);
+    let data = { ...props.personalFormDataValidation };
+    if (PersonalFormvalidateFields(e.target.name, e.target.value) == false) {
+      data[e.target.name] = true;
+    } else {
+      data[e.target.name] = false;
+    }
+    props.setPersonalFormData(data);
+  };
+
+  function handleErrorValidationDivs(typeName) {
+    if (
+      props.personalFormDataValidation[typeName] == false ||
+      props.formData[typeName].length == 0
+    ) {
+      return <p style={{ height: "5px" }}>&nbsp;</p>;
+    } else {
+      return (
+        <p style={{ color: "red", height: "5px", fontSize: "13px" }}>
+          Invalid {typeName}
+        </p>
+      );
+    }
+  }
+
   const back = (e) => {
     e.preventDefault();
     props.prevStep();
   };
   const continuePage = (e) => {
     console.log("Clicked the continue button");
-    e.preventDefault();
-    props.nextStep();
+    console.log("Form Detaila After personal info", props.formData);
+    // setContinueClicked(true);
+    //   if (validateFields("email") == false) {
+    //     console.log("Inside true statmenet");
+    //     setContinueClicked(true);
+    //     return;
+    //   }else{
+    //   console.log("After state setting",continueClicked);
+    //   props.nextStep();
+    // }
   };
-  const [continueClicked, setContinueClicked] = useState(false);
-  function validateFields(inputFieldName) {
-    console.log(
-      "TEsting for the input feilds",
-      props.formData[inputFieldName],
-      inputFieldName
-    );
-    switch (inputFieldName) {
-      case "email":
-        if (
-          /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-            props.formData[inputFieldName]
-          ) ||
-          props.formData[inputFieldName].length == 0
-        ) {
-          return true;
-        }
-        return false;
-      // case "full_name":
-      //   console.log("Inside");
-      //   if (
-      //     props.formData[inputFieldName].length > 3 ||
-      //     props.formData[inputFieldName].length == 0
-      //   ) {
-      //     return <p style={{ height: "5px" }}>&nbsp;</p>;
-      //   }
-      //   return (
-      //     <p style={{ color: "red", height: "5px", fontSize: "13px" }}>
-      //       Invalid Name
-      //     </p>
-      //   );
-      // case "mother_name":
-      //   console.log("Inside");
-      //   if (
-      //     props.formData[inputFieldName].length > 3 ||
-      //     props.formData[inputFieldName].length == 0
-      //   ) {
-      //     return <p style={{ height: "5px" }}>&nbsp;</p>;
-      //   }
-      //   return (
-      //     <p style={{ color: "red", height: "5px", fontSize: "13px" }}>
-      //       Invalid Mother Name
-      //     </p>
-      //   );
-      // case "father_name":
-      //   console.log("Inside");
-      //   if (
-      //     props.formData[inputFieldName].length > 3 ||
-      //     props.formData[inputFieldName].length == 0
-      //   ) {
-      //     return <p style={{ height: "5px" }}>&nbsp;</p>;
-      //   }
-      //   return (
-      //     <p style={{ color: "red", height: "5px", fontSize: "13px" }}>
-      //       Invalid Father name
-      //     </p>
-      //   );
-      // case "address":
-      //   console.log("Inside");
-      //   if (
-      //     props.formData[inputFieldName].length > 3 ||
-      //     props.formData[inputFieldName].length == 0
-      //   ) {
-      //     return <p style={{ height: "5px" }}>&nbsp;</p>;
-      //   }
-      //   return (
-      //     <p style={{ color: "red", height: "5px", fontSize: "13px" }}>
-      //       Invalid Address
-      //     </p>
-      //   );
-      // case "mobile_number":
-      //   console.log("Inside");
-      //   if (
-      //     props.formData[inputFieldName].length == 10 ||
-      //     props.formData[inputFieldName].length == 0
-      //   ) {
-      //     return <p style={{ height: "5px" }}>&nbsp;</p>;
-      //   }
-      //   return (
-      //     <p style={{ color: "red", height: "5px", fontSize: "13px" }}>
-      //       Invalid Mobile number
-      //     </p>
-      //   );
-      // case "date_of_birth":
-      //   console.log("Inside");
-      //   if (props.formData[inputFieldName] != null) {
-      //     return <p style={{ height: "5px" }}>&nbsp;</p>;
-      //   }
-      //   return (
-      //     <p style={{ color: "red", height: "5px", fontSize: "13px" }}>
-      //       Invalid date
-      //     </p>
-      //   );
-
-      default:
-        return false;
+  function disableContinueButtonValidation() {
+    if (props.personalFormDataValidation.email == false) {
+      return false;
     }
+    return true;
   }
-
+  console.log(
+    "Continue value eamil value",
+    props.personalFormDataValidation.email
+  );
   return (
     <div className="personal-details-page">
       <ProgressStep step={props.step}></ProgressStep>
@@ -146,10 +88,11 @@ const FormPersonalDetails = (props) => {
                     ...props.formData,
                     full_name: e.target.value,
                   });
+                  handleFormValidationValues(e);
                 }}
+                name="full_name"
               />
-
-              {validateFields("full_name")}
+              {handleErrorValidationDivs("full_name")}
             </div>
 
             <div className="personal-details-input">
@@ -160,20 +103,16 @@ const FormPersonalDetails = (props) => {
                 placeholder="enter email address"
                 required
                 value={props.formData.email}
-                onChange={(e) => {
-                  props.setFormData({
+                onChange={async (e) => {
+                  await props.setFormData({
                     ...props.formData,
                     email: e.target.value,
                   });
+                  handleFormValidationValues(e);
                 }}
+                name="email"
               />
-              {continueClicked == false ? (
-                <p style={{ height: "5px" }}>&nbsp;</p>
-              ) : (
-                <p style={{ color: "red", height: "5px", fontSize: "13px" }}>
-                  Invalid EMAIL ID
-                </p>
-              )}
+              {handleErrorValidationDivs("email")}
             </div>
           </div>
 
@@ -191,9 +130,11 @@ const FormPersonalDetails = (props) => {
                     ...props.formData,
                     father_name: e.target.value,
                   });
+                  handleFormValidationValues(e);
                 }}
+                name="father_name"
               />
-              {validateFields("father_name")}
+              {handleErrorValidationDivs("father_name")}
             </div>
 
             <div className="personal-details-input">
@@ -209,9 +150,11 @@ const FormPersonalDetails = (props) => {
                     ...props.formData,
                     mother_name: e.target.value,
                   });
+                  handleFormValidationValues(e);
                 }}
+                name="mother_name"
               />
-              {validateFields("mother_name")}
+              {handleErrorValidationDivs("mother_name")}
             </div>
           </div>
           <div className="personal-details-input">
@@ -224,14 +167,14 @@ const FormPersonalDetails = (props) => {
                   ...props.formData,
                   address: e.target.value,
                 });
+                handleFormValidationValues(e);
               }}
               placeholder=""
               className="form-control"
               rows="2"
               cols="100"
             />
-
-            {validateFields("address")}
+            {handleErrorValidationDivs("address")}
           </div>
           <div className="flex-form-wrapper">
             <div className="personal-details-input">
@@ -247,9 +190,11 @@ const FormPersonalDetails = (props) => {
                     ...props.formData,
                     mobile_number: e.target.value,
                   });
+                  handleFormValidationValues(e);
                 }}
+                name="mobile_number"
               />
-              {validateFields("mobile_number")}
+              {handleErrorValidationDivs("mobile_number")}
             </div>
             <div className="personal-details-input">
               <label style={{ marginBottom: "10px" }}>Date of Birth</label>
@@ -264,10 +209,12 @@ const FormPersonalDetails = (props) => {
                     ...props.formData,
                     date_of_birth: e.target.value,
                   });
+                  handleFormValidationValues(e);
                 }}
                 max="2018-12-31"
+                name="date_of_birth"
               />
-              {validateFields("date_of_birth")}
+              {handleErrorValidationDivs("date_of_birth")}
             </div>
           </div>
           <div className="flex-form-wrapper">
@@ -279,6 +226,7 @@ const FormPersonalDetails = (props) => {
                     ...props.formData,
                     level_of_education: e.target.value,
                   });
+                  handleFormValidationValues(e);
                 }}
                 className="form-control"
                 name="level_of_education"
@@ -293,6 +241,7 @@ const FormPersonalDetails = (props) => {
                   return <option key={key}>{heading}</option>;
                 })}
               </select>
+              {handleErrorValidationDivs("level_of_education")}
             </div>
 
             <div className="personal-details-input">
@@ -305,6 +254,7 @@ const FormPersonalDetails = (props) => {
                     ...props.formData,
                     department: e.target.value,
                   });
+                  handleFormValidationValues(e);
                 }}
                 name="department"
               >
@@ -317,6 +267,7 @@ const FormPersonalDetails = (props) => {
                   return <option key={key}>{heading}</option>;
                 })}
               </select>
+              {handleErrorValidationDivs("level_of_education")}
             </div>
           </div>
           {props.departmentIndex != -1 ? (
@@ -329,6 +280,7 @@ const FormPersonalDetails = (props) => {
                     ...props.formData,
                     course: e.target.value,
                   });
+                  handleFormValidationValues(e);
                 }}
                 name="course"
               >
@@ -343,6 +295,7 @@ const FormPersonalDetails = (props) => {
                   }
                 )}
               </select>
+              {handleErrorValidationDivs("level_of_education")}
             </div>
           ) : (
             <div />
@@ -351,13 +304,21 @@ const FormPersonalDetails = (props) => {
             nextStep={props.nextStep}
             prevStep={props.prevStep}
             onContinue={() => {
-              console.log("Form Detaila After personal info", props.formData);
-              // setContinueClicked(true);
-              if (validateFields("email") == false) {
-                setContinueClicked(true);
-              }
+              continuePage();
             }}
             formData={props.formData}
+            disableContinueButton={false &&(
+              props.personalFormDataValidation.email ||
+              props.personalFormDataValidation.full_name ||
+              props.personalFormDataValidation.father_name ||
+              props.personalFormDataValidation.mobile_number ||
+              props.personalFormDataValidation.mother_name ||
+              props.personalFormDataValidation.address ||
+              props.personalFormDataValidation.date_of_birth ||
+              props.personalFormDataValidation.level_of_education ||
+              props.personalFormDataValidation.department ||
+              props.personalFormDataValidation.course )
+            }
           />
         </form>
       </div>

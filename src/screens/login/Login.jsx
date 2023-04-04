@@ -16,6 +16,7 @@ export default function Login () {
         'email':'abc@gmail.com',
         'password':'187261872681'
       })
+      
       .then((json) => console.log("Api result",json))
       .catch((err)=> console.log("Err",err));
     

@@ -10,8 +10,16 @@ import {
   HOME_CONTENT2,
   HOME_IMAGE2,
 } from "../../Constants";
+import {useNavigate } from "react-router-dom";
 
 export default function Home() {
+  
+   
+  const navigate = useNavigate();
+  function handleApply(event) {
+    console.log("Apply button clicked");
+    navigate('/apply',{replace:true});
+  }
   return (
     <div className="screen home">
       <HeadComponent
@@ -20,6 +28,7 @@ export default function Home() {
         headingText={HOME_HEADING_TEXT}
         displayButton={true}
         buttonName="Apply Now"
+        clickHandler={handleApply}
       />
       <Slider sliderList={["", "", "", "", "", ""]} />
       <p className="home-top-text">

@@ -34,11 +34,26 @@ const Apply = (props) => {
     exam_details: null,
   });
 
+  const [personalFormDataValidation, setPersonalFormData] = useState({
+    full_name: true,
+    father_name: true,
+    mother_name: true,
+    mobile_number: true,
+    date_of_birth: true,
+    email: true,
+    department: true,
+    course: true,
+    address: true,
+    level_of_education: true,
+  });
+
   const [departmentIndex, setDepartmentIndex] = useState(-1);
 
   const [formFields, setFormFields] = useState([
     { college_name: "", gpa: "", file: null, level_of_education: "" },
   ]);
+  const [studyFormFieldsValidation, setStudyFormFieldsValidation] = useState([]);
+
   const [workExpformFields, setWorkExpFormFields] = useState([
     {
       company: "",
@@ -48,6 +63,17 @@ const Apply = (props) => {
       designation: "",
     },
   ]);
+
+  const [workExpformFieldsValidation, setWorkExpFormFieldsValidation] =
+    useState([
+      {
+        company: false,
+        start_date: false,
+        description: false,
+        end_date: false,
+        designation: false,
+      },
+    ]);
 
   const handleFormChange = (event, index, TID) => {
     let data = [...formFields];
@@ -76,8 +102,19 @@ const Apply = (props) => {
 
     setFormFields([...formFields, object]);
     console.log("Education opened", openEducation);
-    setOpenEducation(openEducation + 1);
 
+    // let validationObject = {
+    //   college_name: true,
+    //   gpa: true,
+    //   file: true,
+    //   level_of_education: true,
+    // };
+    // setStudyFormFieldsValidation([
+    //   ...studyFormFieldsValidation,
+    //   validationObject,
+    // ]);
+
+    setOpenEducation(openEducation + 1);
     console.log("Education opened", openEducation);
   };
 
@@ -85,6 +122,14 @@ const Apply = (props) => {
     let data = [...formFields];
     data.splice(index, 1);
     setFormFields(data);
+
+    let validateObject = [...studyFormFieldsValidation];
+    validateObject.splice(index, 1);
+
+    setStudyFormFieldsValidation(validateObject);
+
+    setOpenEducation(openEducation - 1);
+    console.log("Education opened after delete clicked", openEducation);
   };
 
   const handleWorkFormChange = (event, index) => {
@@ -104,6 +149,20 @@ const Apply = (props) => {
     };
 
     setWorkExpFormFields([...workExpformFields, object]);
+
+    let validationObject = {
+      company: false,
+      start_date: false,
+      description: false,
+      end_date: false,
+      designation: false,
+    };
+
+    setWorkExpFormFieldsValidation([
+      ...workExpformFieldsValidation,
+      validationObject,
+    ]);
+
     setOpenWork(openWork + 1);
   };
 
@@ -111,6 +170,13 @@ const Apply = (props) => {
     let data = [...workExpformFields];
     data.splice(index, 1);
     setWorkExpFormFields(data);
+
+    let validateObject = [...workExpformFieldsValidation];
+    validateObject.splice(index, 1);
+
+    setWorkExpFormFieldsValidation(validateObject);
+
+    setOpenWork(openWork - 1);
   };
 
   const [openEducation, setOpenEducation] = useState(1);
@@ -195,6 +261,8 @@ const Apply = (props) => {
             departmentIndex={departmentIndex}
             setDepartmentIndex={setDepartmentIndex}
             step={step}
+            personalFormDataValidation={personalFormDataValidation}
+            setPersonalFormData={setPersonalFormData}
           />
         );
       case 2:
@@ -221,6 +289,10 @@ const Apply = (props) => {
             submit={submit}
             handleFormFileUploads={handleFormFileUploads}
             step={step}
+            studyFormFieldsValidation={studyFormFieldsValidation}
+            setStudyFormFieldsValidation={setStudyFormFieldsValidation}
+            workExpformFieldsValidation={workExpformFieldsValidation}
+            setWorkExpFormFieldsValidation={setWorkExpFormFieldsValidation}
           />
         );
       case 3:

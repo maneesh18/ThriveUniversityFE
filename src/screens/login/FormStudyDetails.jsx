@@ -6,8 +6,124 @@ import ApplicationBottom from "./ApplicationBottom";
 import { MdOutlineDelete } from "react-icons/md";
 import { AiOutlinePlus } from "react-icons/ai";
 import ProgressStep from "./ProgressStep";
+import { StudyFormvalidateFields, WorkFormvalidateFields } from "./Validations";
 
 const FormStudyDetails = (props) => {
+ 
+
+  const addStudyValidationState = (e, index) => {
+    if (props.studyFormFieldsValidation[index] === undefined) {
+      console.log("Inside If statement of study details");
+      let validationObject = {
+        college_name: true,
+        gpa: true,
+        file: true,
+        level_of_education: true,
+      };
+      props.setStudyFormFieldsValidation([
+        ...props.studyFormFieldsValidation,
+        validationObject,
+      ]);
+
+      handleFormValidationValues(e,index);
+    }
+    else{
+
+    handleFormValidationValues(e,index);
+
+    }
+  };
+
+  const handleFormValidationValues = (e, index) => {
+    console.log("Inside validation call method",props.studyFormFieldsValidation);
+    // if (props.studyFormFieldsValidation[index] !== undefined) {
+      console.log("Inside study fomr data", props.studyFormFieldsValidation);
+      let data = [...props.studyFormFieldsValidation];
+      if (StudyFormvalidateFields(e.target.name, e.target.value) == false) {
+        data[index][e.target.name] = true;
+      } else {
+        data[index][e.target.name] = false;
+      }
+      props.setStudyFormFieldsValidation(data);
+    // }
+  };
+
+  const handleFileValidation = (e, index) => {
+    let data = [...props.studyFormFieldsValidation];
+    if (StudyFormvalidateFields(e.target.name, e.target) == false) {
+      data[index][e.target.name] = true;
+    } else {
+      data[index][e.target.name] = false;
+    }
+    props.setStudyFormFieldsValidation(data);
+  };
+
+  function handleErrorValidationDivs(typeName, index) {
+    if (
+      props.studyFormFieldsValidation[index] === undefined ||
+      props.studyFormFieldsValidation[index][typeName] == false ||
+      props.studyFormFieldsValidation[index][typeName].length == 0
+    ) {
+      return <p style={{ height: "5px" }}>&nbsp;</p>;
+    } else {
+      return (
+        <p style={{ color: "red", height: "5px", fontSize: "13px" }}>
+          Invalid {typeName}
+        </p>
+      );
+    }
+  }
+
+  const handleWorkFormValidationValues = (e, index) => {
+    // console.log("Invalid email data", props.formData.email);
+    let data = [...props.workExpformFieldsValidation];
+    if (WorkFormvalidateFields(e.target.name, e.target.value) == false) {
+      data[index][e.target.name] = true;
+    } else {
+      data[index][e.target.name] = false;
+    }
+    props.setWorkExpFormFieldsValidation(data);
+  };
+
+  function handleWorkErrorValidationDivs(typeName, index) {
+    if (
+      props.workExpformFieldsValidation[index][typeName] == false
+      //  || props.formFields[index][typeName].length == 0
+    ) {
+      return <p style={{ height: "5px" }}>&nbsp;</p>;
+    } else {
+      return (
+        <p style={{ color: "red", height: "5px", fontSize: "13px" }}>
+          Invalid {typeName}
+        </p>
+      );
+    }
+  }
+
+  function handleContinueClick() {
+    let tempBool = false;
+    console.log("Inside hanfle continue click", tempBool);
+    props.studyFormFieldsValidation.forEach((data) => {
+      tempBool =
+        tempBool ||
+        data.college_name == true ||
+        data.gpa == true ||
+        data.file == true ||
+        data.level_of_education == true;
+    });
+    props.workExpformFieldsValidation.forEach((data) => {
+      tempBool =
+        tempBool ||
+        data.company == true ||
+        data.start_date == true ||
+        data.end_date == true ||
+        data.designation == true ||
+        data.description == true;
+    });
+
+    return tempBool;
+  }
+
   const back = (e) => {
     e.preventDefault();
     props.prevStep();
@@ -29,9 +145,7 @@ const FormStudyDetails = (props) => {
       education: props.formFields,
     });
   };
-  useEffect(() => {
-    console.log("Inside Study Details Use effect", props.formData);
-  }, []);
+
   return (
     <div className="study_details-content">
       <ProgressStep step={props.step}></ProgressStep>
@@ -69,12 +183,14 @@ const FormStudyDetails = (props) => {
                           <input
                             name="college_name"
                             placeholder="College Name"
-                            onChange={(event) =>
-                              props.handleFormChange(event, index)
-                            }
+                            onChange={(event) => {
+                              props.handleFormChange(event, index);
+                              addStudyValidationState(event, index); 
+                            }}
                             value={form.college_name}
                             className="form-control"
                           />
+                          {handleErrorValidationDivs("college_name", index)}
                         </div>
                         <div className="input-element-div">
                           <label style={{ marginBottom: "10px" }}>
@@ -83,13 +199,19 @@ const FormStudyDetails = (props) => {
                           <input
                             name="gpa"
                             placeholder="Result"
-                            onChange={(event) =>
-                              props.handleFormChange(event, index)
-                            }
+                            onChange={(event) => {
+                              props.handleFormChange(event, index);
+                              addStudyValidationState(event, index);
+                            }}
                             value={form.gpa}
                             className="form-control"
+                            type="number"
+                            // onBlur={(event) => {
+                            //   handleFormValidationValues(event, index);
+                            // }}
                           />
                         </div>
+                        {handleErrorValidationDivs("gpa", index)}
                       </div>
 
                       <div>
@@ -102,23 +224,37 @@ const FormStudyDetails = (props) => {
                             placeholder="Upload"
                             onChange={(event) => {
                               props.handleFormFileUploads(event, index);
+                              addStudyValidationState(event, index);
                             }}
                             className="form-control"
                             type="file"
+                            // onBlur={(event) => {
+                            //   handleFileValidation(event, index);
+                            // }}
                           />
-                          {form.file==null ? <p style={{marginBottom:"0px"}}></p> : <p style={{fontSize:"10px"}}>{form.file["name"]}</p>}
-                          {/* <p>{form.file == null ? "" : form.file["name"]}</p> */}
+                          {form.file == null ? (
+                            <p style={{ marginBottom: "0px" }}></p>
+                          ) : (
+                            <p style={{ fontSize: "10px" }}>
+                              {form.file["name"]}
+                            </p>
+                          )}
+                          {handleErrorValidationDivs("file", index)}
                         </div>
                         <div className="input-element-div">
                           <label style={{ marginBottom: "10px" }}>
                             Level of Education
                           </label>
                           <select
-                            onChange={(event) =>
-                              props.handleFormChange(event, index)
-                            }
+                            onChange={(event) => {
+                              props.handleFormChange(event, index);
+                              addStudyValidationState(event, index);
+                            }}
                             name="level_of_education"
                             className="form-control"
+                            // onBlur={(event) => {
+                            //   handleFormValidationValues(event, index);
+                            // }}
                           >
                             <option>
                               {form.level_of_education != ""
@@ -128,6 +264,10 @@ const FormStudyDetails = (props) => {
                             <option>UG</option>
                             <option>Masters</option>
                           </select>
+                          {handleErrorValidationDivs(
+                            "level_of_education",
+                            index
+                          )}
                         </div>
                       </div>
                     </div>
@@ -196,12 +336,14 @@ const FormStudyDetails = (props) => {
                             <input
                               name="company"
                               placeholder="Company Name"
-                              onChange={(event) =>
-                                props.handleWorkFormChange(event, index)
-                              }
+                              onChange={(event) => {
+                                props.handleWorkFormChange(event, index);
+                                handleWorkFormValidationValues(event, index);
+                              }}
                               value={form.company}
                               className="form-control"
                             />
+                            {handleWorkErrorValidationDivs("company", index)}
                           </div>
 
                           <div className="input-element-div">
@@ -211,14 +353,16 @@ const FormStudyDetails = (props) => {
                             <input
                               name="start_date"
                               placeholder="pick a date"
-                              onChange={(event) =>
-                                props.handleWorkFormChange(event, index)
-                              }
+                              onChange={(event) => {
+                                props.handleWorkFormChange(event, index);
+                                handleWorkFormValidationValues(event, index);
+                              }}
                               value={form.start_date}
                               className="form-control"
                               required="true"
                               type="date"
                             />
+                            {handleWorkErrorValidationDivs("start_date", index)}
                           </div>
                         </div>
                         <div>
@@ -229,12 +373,17 @@ const FormStudyDetails = (props) => {
                             <input
                               name="designation"
                               placeholder="Role"
-                              onChange={(event) =>
-                                props.handleWorkFormChange(event, index)
-                              }
+                              onChange={(event) => {
+                                props.handleWorkFormChange(event, index);
+                                handleWorkFormValidationValues(event, index);
+                              }}
                               value={form.designation}
                               className="form-control"
                             />
+                            {handleWorkErrorValidationDivs(
+                              "designation",
+                              index
+                            )}
                           </div>
 
                           <div className="input-element-div">
@@ -242,13 +391,15 @@ const FormStudyDetails = (props) => {
                             <input
                               name="end_date"
                               placeholder="Pick a data"
-                              onChange={(event) =>
-                                props.handleWorkFormChange(event, index)
-                              }
+                              onChange={(event) => {
+                                props.handleWorkFormChange(event, index);
+                                handleWorkFormValidationValues(event, index);
+                              }}
                               value={form.end_date}
                               className="form-control"
                               type="date"
                             />
+                            {handleWorkErrorValidationDivs("end_date", index)}
                           </div>
                         </div>
                       </div>
@@ -264,15 +415,17 @@ const FormStudyDetails = (props) => {
                         </label>
                         <textarea
                           name="description"
-                          onChange={(event) =>
-                            props.handleWorkFormChange(event, index)
-                          }
+                          onChange={(event) => {
+                            props.handleWorkFormChange(event, index);
+                            handleWorkFormValidationValues(event, index);
+                          }}
                           value={form.description}
                           placeholder="write awayy..."
                           className="form-control"
                           rows="2"
                           cols="60"
                         />
+                        {handleWorkErrorValidationDivs("description", index)}
                       </div>
                     </div>
 
@@ -301,7 +454,7 @@ const FormStudyDetails = (props) => {
                     >
                       <MdOutlineDelete
                         size="1.5em"
-                        onClick={() => props.removeFields(index)}
+                        onClick={() => props.removeWorkFields(index)}
                         style={{}}
                       />
                     </div>
@@ -318,6 +471,7 @@ const FormStudyDetails = (props) => {
         prevStep={props.prevStep}
         onContinue={handleOnContinue}
         formData={props.formData}
+        disableContinueButton={handleContinueClick()}
       />
     </div>
   );
