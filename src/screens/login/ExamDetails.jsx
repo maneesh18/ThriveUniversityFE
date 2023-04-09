@@ -10,10 +10,62 @@ import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
 import ApplicationBottom from "./ApplicationBottom";
+import { ScoreFormvalidateFields } from "./Validations";
 
 const imageMimeType = /image\/(png|jpg|jpeg)/i;
 
 const ExamDetails = (props) => {
+
+
+
+
+  
+
+
+  const handleExamFormValidationValues = (e, index) => {
+    console.log("Inside validation call method",props.scoreformFieldsValidation);
+    // if (props.studyFormFieldsValidation[index] !== undefined) {
+      console.log("Inside study fomr data", props.scoreformFieldsValidation);
+      let data = [...props.scoreformFieldsValidation];
+      if (ScoreFormvalidateFields(e.target.name, e.target.value) == false) {
+        data[index][e.target.name] = true;
+      } else {
+        data[index][e.target.name] = false;
+      }
+      props.setScoreFormFieldsValidation(data);
+    // }
+  };
+
+  const handleExamFileValidation = (e, index) => {
+    let data = [...props.scoreformFieldsValidation];
+    let x=ScoreFormvalidateFields(e.target.name, e.target);
+    if (x == false) {
+      data[index][e.target.name] = true;
+    } else {
+      data[index][e.target.name] = false;
+    }
+    props.setScoreFormFieldsValidation(data);
+  };
+
+  function handleExamErrorValidationDivs(typeName, index) {
+    if (
+      props.scoreformFieldsValidation[index] === undefined ||
+      props.scoreformFieldsValidation[index][typeName] == false ||
+      props.scoreformFieldsValidation[index][typeName].length == 0
+    ) {
+      return <p style={{ height: "5px" }}>&nbsp;</p>;
+    } else {
+      return (
+        <p style={{ color: "red", height: "5px", fontSize: "13px" }}>
+          Invalid {typeName}
+        </p>
+      );
+    }
+  }
+
+
+
+
   const back = (e) => {
     e.preventDefault();
     props.prevStep();
@@ -135,12 +187,14 @@ const ExamDetails = (props) => {
                             <input
                               name="score"
                               placeholder="Score.."
-                              onChange={(event) =>
-                                props.handleScoreFormChange(event, index)
-                              }
+                              onChange={(event) =>{
+                                props.handleScoreFormChange(event, index);
+                                handleExamFormValidationValues(event, index);
+                              }}
                               value={form.score}
                               className="form-control"
                             />
+                            {handleExamErrorValidationDivs("score", index)}
                           </div>
                           <div className="input-element-div">
                             <label style={{ marginBottom: "10px" }}>
@@ -149,12 +203,14 @@ const ExamDetails = (props) => {
                             <input
                               name="additional_data"
                               placeholder="addtional info"
-                              onChange={(event) =>
+                              onChange={(event) =>{
                                 props.handleScoreFormChange(event, index)
-                              }
+                                handleExamFormValidationValues(event, index);
+                              }}
                               value={form.additional_data}
                               className="form-control"
                             />
+                            {handleExamErrorValidationDivs("additional_data", index)}
                           </div>
                         </div>
 
@@ -166,28 +222,31 @@ const ExamDetails = (props) => {
                             <input
                               name="upload_score"
                               placeholder="Upload"
-                              onChange={(event) =>
-                                props.handleScoreFormFileUploads(event, index)
-                              }
+                              onChange={(event) =>{
+                                props.handleScoreFormFileUploads(event, index);
+                                handleExamFileValidation(event,index);
+                              }}
                               type="file"
                               className="form-control"
                             />
                             {form.upload_score == null ? (
                               <p style={{ marginBottom: "0px" }}></p>
                             ) : (
-                              <p style={{ fontSize: "10px" }}>
+                              <p style={{ fontSize: "10px", marginBottom: "0px" }}>
                                 {form.upload_score["name"]}
                               </p>
                             )}
+                            {handleExamErrorValidationDivs("upload_score", index)}
                           </div>
                           <div className="input-element-div">
                             <label style={{ marginBottom: "10px" }}>
                               Exam Name
                             </label>
                             <select
-                              onChange={(event) =>
-                                props.handleScoreFormChange(event, index)
-                              }
+                              onChange={(event) =>{
+                                props.handleScoreFormChange(event, index);
+                                handleExamFormValidationValues(event, index);
+                              }}
                               name="exam_name"
                               className="form-control"
                             >
@@ -199,7 +258,9 @@ const ExamDetails = (props) => {
 
                               <option>GRE</option>
                               <option>IELTS</option>
+                              
                             </select>
+                            {handleExamErrorValidationDivs("exam_name", index)}
                           </div>
                         </div>
                       </div>

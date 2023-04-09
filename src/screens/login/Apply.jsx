@@ -52,7 +52,13 @@ const Apply = (props) => {
   const [formFields, setFormFields] = useState([
     { college_name: "", gpa: "", file: null, level_of_education: "" },
   ]);
-  const [studyFormFieldsValidation, setStudyFormFieldsValidation] = useState([]);
+  const [studyFormFieldsValidation, setStudyFormFieldsValidation] = useState([
+    { college_name: true,
+      gpa: true,
+      file: true,
+      level_of_education: true,
+    }
+  ]);
 
   const [workExpformFields, setWorkExpFormFields] = useState([
     {
@@ -67,11 +73,11 @@ const Apply = (props) => {
   const [workExpformFieldsValidation, setWorkExpFormFieldsValidation] =
     useState([
       {
-        company: false,
-        start_date: false,
-        description: false,
-        end_date: false,
-        designation: false,
+        company: true,
+        start_date: true,
+        description: true,
+        end_date: true,
+        designation: true,
       },
     ]);
 
@@ -103,16 +109,16 @@ const Apply = (props) => {
     setFormFields([...formFields, object]);
     console.log("Education opened", openEducation);
 
-    // let validationObject = {
-    //   college_name: true,
-    //   gpa: true,
-    //   file: true,
-    //   level_of_education: true,
-    // };
-    // setStudyFormFieldsValidation([
-    //   ...studyFormFieldsValidation,
-    //   validationObject,
-    // ]);
+    let validationObject = {
+      college_name: true,
+      gpa: true,
+      file: true,
+      level_of_education: true,
+    };
+    setStudyFormFieldsValidation([
+      ...studyFormFieldsValidation,
+      validationObject,
+    ]);
 
     setOpenEducation(openEducation + 1);
     console.log("Education opened", openEducation);
@@ -151,11 +157,11 @@ const Apply = (props) => {
     setWorkExpFormFields([...workExpformFields, object]);
 
     let validationObject = {
-      company: false,
-      start_date: false,
-      description: false,
-      end_date: false,
-      designation: false,
+      company: true,
+      start_date: true,
+      description: true,
+      end_date: true,
+      designation: true,
     };
 
     setWorkExpFormFieldsValidation([
@@ -192,11 +198,24 @@ const Apply = (props) => {
       upload_score: null,
     },
   ]);
-
+  const [scoreformFieldsValidation, setScoreFormFieldsValidation] = useState([
+    {
+      exam_name: true,
+      score: true,
+      additional_data: true,
+      upload_score: true,
+    },
+  ]);
   const removeScoreFields = (index) => {
     let data = [...scoreformFields];
     data.splice(index, 1);
     setScoreFormFields(data);
+    let validateObject = [...scoreformFieldsValidation];
+    validateObject.splice(index, 1);
+
+    setScoreFormFieldsValidation(validateObject);
+
+    setOpenScore(openScore - 1);
   };
 
   const handleScoreFormChange = (event, index) => {
@@ -219,8 +238,20 @@ const Apply = (props) => {
       additional_data: "",
       upload_score: "",
     };
-
+    
     setScoreFormFields([...scoreformFields, object]);
+
+    let validationObject = {
+      exam_name: true,
+      score: true,
+      additional_data: true,
+      upload_score: true,
+    };
+    setScoreFormFieldsValidation([
+      ...scoreformFieldsValidation,
+      validationObject,
+    ]);
+
     setOpenScore(openScore + 1);
   };
 
@@ -311,6 +342,8 @@ const Apply = (props) => {
             setOpenScore={setOpenScore}
             handleScoreFormFileUploads={handleScoreFormFileUploads}
             step={step}
+            scoreformFieldsValidation={scoreformFieldsValidation}
+            setScoreFormFieldsValidation={setScoreFormFieldsValidation}
           />
         );
       case 4:

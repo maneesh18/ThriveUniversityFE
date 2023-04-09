@@ -133,3 +133,34 @@ export const WorkFormvalidateFields = (inputFieldName, textData) => {
       return false;
   }
 };
+
+export const ScoreFormvalidateFields = (inputFieldName, textData) => {
+  console.log("TEsting for the input feilds", textData, inputFieldName);
+  switch (inputFieldName) {
+    case "score":
+      if (textData.length > 3) {
+        return true;
+      }
+      return false;
+    case "exam_name":
+      if (textData.length > 0) {
+        return true;
+      }
+      return false;
+    case "upload_score":
+      console.log("Inside upload score");
+      if (textData.files[0].size < 1028 * 128) {
+        return true;
+      }
+      return false;
+    case "additional_data":
+      console.log("Inside additiona");
+      if (textData.length > 3) {
+        return true;
+      }
+      return false;
+
+    default:
+      return false;
+  }
+};

@@ -22,7 +22,7 @@ const PreviewDetails = (props) => {
     // props.nextStep();
    
     setContinueClicked(true);
-    callFormSubmitAPi(await fillFormData(props.formData));
+    callFormSubmitAPi(fillFormData(props.formData));
     console.log("Education Form details", props.formData);
   };
   function fillFormData(formData){
@@ -37,11 +37,62 @@ const PreviewDetails = (props) => {
     forms.append("course",formData.course);
     forms.append("address",formData.address);
     forms.append("level_of_education",formData.level_of_education);
+    var index=0;
+    var educationForm=[];
+    props.formData.education.forEach((data) => {
+     let tempStudystatus =
+      { college_name: data.college_name,
+        gpa: data.gpa,
+        file: getImgData(data.file, "-study-" + index),
+        level_of_education: data.level_of_education,
+      }
+      educationForm.push(tempStudystatus);
+      index=index+1;
+    });
+    index=0
+
+    forms.append("education",educationForm)
+
+    
+    var WorkForm=[];
+    props.formData.employment_status.forEach((data) => {
+     let tempStudystatus =
+      {
+        company: data.company,
+      start_date: data.start_date,
+      description: data.description,
+      end_date: data.end_date,
+      designation: data.designation ,  
+      }
+      WorkForm.push(tempStudystatus);
+      index=index+1;
+    });
+    index=0
+    forms.append("employment_status",WorkForm)
+
+
+    
+    var tempExamstatus=[];
+    props.formData.exam_details.forEach((data) => {
+     let tempStudystatus =
+      {
+        
+          exam_name: data.exam_name,
+          score: data.score,
+          additional_data: data.additional_data,
+          upload_score: getImgData(data.upload_score, "-exam-" + index),
+        
+      }
+      tempExamstatus.push(tempStudystatus);
+      index=index+1;
+    });
+    index=0
+    forms.append("exam_details",tempExamstatus)
+
     console.log("Form Data is ",forms);
     for (var pair of forms.entries()) {
       console.log(pair[0]+ ', ' + pair[1]); 
   }
-    // forms.append("file", document.getElementById("file").files[0]);
     return forms;
   }
   const callFormSubmitAPi = (forms) => {

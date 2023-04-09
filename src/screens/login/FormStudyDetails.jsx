@@ -11,28 +11,6 @@ import { StudyFormvalidateFields, WorkFormvalidateFields } from "./Validations";
 const FormStudyDetails = (props) => {
  
 
-  const addStudyValidationState = (e, index) => {
-    if (props.studyFormFieldsValidation[index] === undefined) {
-      console.log("Inside If statement of study details");
-      let validationObject = {
-        college_name: true,
-        gpa: true,
-        file: true,
-        level_of_education: true,
-      };
-      props.setStudyFormFieldsValidation([
-        ...props.studyFormFieldsValidation,
-        validationObject,
-      ]);
-
-      handleFormValidationValues(e,index);
-    }
-    else{
-
-    handleFormValidationValues(e,index);
-
-    }
-  };
 
   const handleFormValidationValues = (e, index) => {
     console.log("Inside validation call method",props.studyFormFieldsValidation);
@@ -185,7 +163,7 @@ const FormStudyDetails = (props) => {
                             placeholder="College Name"
                             onChange={(event) => {
                               props.handleFormChange(event, index);
-                              addStudyValidationState(event, index); 
+                              handleFormValidationValues(event, index);
                             }}
                             value={form.college_name}
                             className="form-control"
@@ -201,17 +179,14 @@ const FormStudyDetails = (props) => {
                             placeholder="Result"
                             onChange={(event) => {
                               props.handleFormChange(event, index);
-                              addStudyValidationState(event, index);
+                              handleFormValidationValues(event, index);
                             }}
                             value={form.gpa}
                             className="form-control"
                             type="number"
-                            // onBlur={(event) => {
-                            //   handleFormValidationValues(event, index);
-                            // }}
                           />
+                          {handleErrorValidationDivs("gpa", index)}
                         </div>
-                        {handleErrorValidationDivs("gpa", index)}
                       </div>
 
                       <div>
@@ -224,13 +199,10 @@ const FormStudyDetails = (props) => {
                             placeholder="Upload"
                             onChange={(event) => {
                               props.handleFormFileUploads(event, index);
-                              addStudyValidationState(event, index);
+                              handleFileValidation(event, index);
                             }}
                             className="form-control"
                             type="file"
-                            // onBlur={(event) => {
-                            //   handleFileValidation(event, index);
-                            // }}
                           />
                           {form.file == null ? (
                             <p style={{ marginBottom: "0px" }}></p>
@@ -248,13 +220,10 @@ const FormStudyDetails = (props) => {
                           <select
                             onChange={(event) => {
                               props.handleFormChange(event, index);
-                              addStudyValidationState(event, index);
+                              handleFormValidationValues(event, index);
                             }}
                             name="level_of_education"
                             className="form-control"
-                            // onBlur={(event) => {
-                            //   handleFormValidationValues(event, index);
-                            // }}
                           >
                             <option>
                               {form.level_of_education != ""
