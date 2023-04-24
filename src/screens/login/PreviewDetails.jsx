@@ -20,83 +20,76 @@ const PreviewDetails = (props) => {
   const continuePage = async (e) => {
     e.preventDefault();
     // props.nextStep();
-   
+
     setContinueClicked(true);
     callFormSubmitAPi(fillFormData(props.formData));
     console.log("Education Form details", props.formData);
   };
-  function fillFormData(formData){
+  function fillFormData(formData) {
     let forms = new FormData();
-    forms.append("full_name",formData.full_name);
-    forms.append("father_name",formData.father_name);
-    forms.append("mother_name",formData.mother_name);
-    forms.append("mobile_number",formData.mobile_number);
-    forms.append("date_of_birth",formData.date_of_birth);
-    forms.append("email",formData.email);
-    forms.append("department",formData.department);
-    forms.append("course",formData.course);
-    forms.append("address",formData.address);
-    forms.append("level_of_education",formData.level_of_education);
-    var index=0;
-    var educationForm=[];
+    forms.append("full_name", formData.full_name);
+    forms.append("father_name", formData.father_name);
+    forms.append("mother_name", formData.mother_name);
+    forms.append("mobile_number", formData.mobile_number);
+    forms.append("date_of_birth", formData.date_of_birth);
+    forms.append("email", formData.email);
+    forms.append("department", formData.department);
+    forms.append("course", formData.course);
+    forms.append("address", formData.address);
+    forms.append("level_of_education", formData.level_of_education);
+    var index = 0;
+    var educationForm = [];
     props.formData.education.forEach((data) => {
-     let tempStudystatus =
-      { college_name: data.college_name,
-        gpa: data.gpa,
-        file: getImgData(data.file, "-study-" + index),
-        level_of_education: data.level_of_education,
-      }
+      let tempStudystatus = [
+         data.college_name,
+         data.gpa,
+         getImgData(data.file, "-study-" + index),
+         data.level_of_education,
+      ];
       educationForm.push(tempStudystatus);
-      index=index+1;
+      index = index + 1;
     });
-    index=0
+    index = 0;
 
-    forms.append("education",educationForm)
+    forms.append("education", educationForm);
 
-    
-    var WorkForm=[];
+    var WorkForm = [];
     props.formData.employment_status.forEach((data) => {
-     let tempStudystatus =
-      {
-        company: data.company,
-      start_date: data.start_date,
-      description: data.description,
-      end_date: data.end_date,
-      designation: data.designation ,  
-      }
+      let tempStudystatus = [
+        data.company,
+        data.start_date,
+        data.description,
+        data.end_date,
+        data.designation,
+      ];
       WorkForm.push(tempStudystatus);
-      index=index+1;
+      index = index + 1;
     });
-    index=0
-    forms.append("employment_status",WorkForm)
+    index = 0;
+    forms.append("employment_status", WorkForm);
 
-
-    
-    var tempExamstatus=[];
+    var tempExamstatus = [];
     props.formData.exam_details.forEach((data) => {
-     let tempStudystatus =
-      {
-        
-          exam_name: data.exam_name,
-          score: data.score,
-          additional_data: data.additional_data,
-          upload_score: getImgData(data.upload_score, "-exam-" + index),
-        
-      }
+      let tempStudystatus = [
+        data.exam_name,
+        data.score,
+        data.additional_data,
+        getImgData(data.upload_score, "-exam-" + index),
+      ];
       tempExamstatus.push(tempStudystatus);
-      index=index+1;
+      index = index + 1;
     });
-    index=0
-    forms.append("exam_details",tempExamstatus)
+    index = 0;
+    forms.append("exam_details", tempExamstatus);
 
-    console.log("Form Data is ",forms);
+    console.log("Form Data is ", forms);
     for (var pair of forms.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]); 
-  }
+      console.log(pair[0] + ", " + pair[1]);
+    }
     return forms;
   }
   const callFormSubmitAPi = (forms) => {
-    console.log("Inside api integration")
+    console.log("Inside api integration");
     axios
       .post(MOckLocalDomain + "/apply", {
         form_data: forms,
