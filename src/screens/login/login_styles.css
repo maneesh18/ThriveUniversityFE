@@ -51,9 +51,10 @@
     width:105%;
 }
 
-.bgimage-img {
+.login-bgimage-img {
     width: 100%;
     filter: brightness(40%);
+    object-fit: fill;
 }
 
 @media only screen and (max-width: 768px) {
@@ -69,7 +70,7 @@
     .login-background-img{
         object-fit: fill;
     }
-    .bgimage-img{
+    .login-bgimage-img{
         height: 850px;
     }
 }

@@ -219,3 +219,13 @@ export const COURSE_LIST = [
   ],
 ];
 
+export const LEVEL_OF_EDUCATION_LIST=[
+  {
+    key:"1",
+    heading:"UG"
+  },
+  {
+    key:"2",
+    heading:"Masters"
+  }
+]

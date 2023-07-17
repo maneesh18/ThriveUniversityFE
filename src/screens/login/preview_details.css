@@ -1,0 +1,62 @@
+.preview-header{
+    font-size: 30px;
+}
+.preview-subheader{
+    padding-left: 10px;
+    font-weight: 400;
+    font-size: 25px;
+}
+#preview-details{
+    padding: 10px;
+    padding-top: 40px;
+}
+.personal-details-body{
+    padding: 10px;
+    /* width: 100%; */
+}
+.personal-details-label{
+    font-size: 20x;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.personal-details-value{
+    font-size: 15px;
+}
+.personal-preview-flex-div{
+    display: flex;
+}
+.personal-preview-flex-div div {
+    /* display: flex; */
+    width: 100%;
+}
+.preview-college-name{
+    visibility: hidden;
+    /* display: none; */
+}
+
+.preview-college-name1{
+    /* visibility: hidden; */
+    display: block;
+}
+
+.overlay-loader{
+display: none; /* Hidden by default */
+position: fixed; /* Stay in place */
+z-index: 999; /* Sit on top */
+left: 0;
+top: 0;
+width: 100%; /* Full width */
+height: 100%; /* Full height */
+overflow: auto; /* Enable scroll if needed */
+background-color: rgb(0, 0, 0); /* Fallback color */
+background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+
+}
+
+@media only screen and (max-width: 768px) {
+    
+.personal-preview-flex-div{
+    display: block;
+    width: 100%;
+}
+}
