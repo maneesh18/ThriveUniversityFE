@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ThriveUniversityFE/static/css/main.419b9025.css",
-    "main.js": "/ThriveUniversityFE/static/js/main.cb4dedc9.js",
+    "main.js": "/ThriveUniversityFE/static/js/main.31da3e77.js",
     "static/js/703.583aee6b.chunk.js": "/ThriveUniversityFE/static/js/703.583aee6b.chunk.js",
     "static/js/513.5d434f1e.chunk.js": "/ThriveUniversityFE/static/js/513.5d434f1e.chunk.js",
     "static/js/496.e907c07a.chunk.js": "/ThriveUniversityFE/static/js/496.e907c07a.chunk.js",
@@ -10,13 +10,13 @@
     "static/media/revicons.woff": "/ThriveUniversityFE/static/media/revicons.e8746a624ed098489406.woff",
     "index.html": "/ThriveUniversityFE/index.html",
     "main.419b9025.css.map": "/ThriveUniversityFE/static/css/main.419b9025.css.map",
-    "main.cb4dedc9.js.map": "/ThriveUniversityFE/static/js/main.cb4dedc9.js.map",
+    "main.31da3e77.js.map": "/ThriveUniversityFE/static/js/main.31da3e77.js.map",
     "703.583aee6b.chunk.js.map": "/ThriveUniversityFE/static/js/703.583aee6b.chunk.js.map",
     "513.5d434f1e.chunk.js.map": "/ThriveUniversityFE/static/js/513.5d434f1e.chunk.js.map",
     "496.e907c07a.chunk.js.map": "/ThriveUniversityFE/static/js/496.e907c07a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.419b9025.css",
-    "static/js/main.cb4dedc9.js"
+    "static/js/main.31da3e77.js"
   ]
 }
