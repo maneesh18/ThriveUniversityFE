@@ -15,7 +15,7 @@ import PageNotFound from "./PageNotFound";
 
 
 function App() {
-  const url = "https://Maneesh18.github.io/ThriveUniversityFE"
+  const url = "https://maneesh18.github.io/ThriveUniversityFE"
   return (
     <div className="App">
       
