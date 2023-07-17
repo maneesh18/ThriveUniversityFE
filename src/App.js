@@ -15,7 +15,7 @@ import PageNotFound from "./PageNotFound";
 
 
 function App() {
-  const url = ""
+  const url = "/ThriveUniversityFE"
   return (
     <div className="App">
       

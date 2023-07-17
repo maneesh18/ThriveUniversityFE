@@ -33,7 +33,7 @@ function Header() {
     handleClose();
   };
 
-  const url = "";
+  const url = "/ThriveUniversityFE";
   const navigate = useNavigate();
 
   return (
