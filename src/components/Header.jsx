@@ -33,7 +33,7 @@ function Header() {
     handleClose();
   };
 
-  const url = "https://maneesh18.github.io/ThriveUniversityFE";
+  const url = "";
   const navigate = useNavigate();
 
   return (
