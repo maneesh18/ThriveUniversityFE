@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/react-gh-pages/static/css/main.2af26fca.css",
+    "main.js": "/react-gh-pages/static/js/main.29d6f51f.js",
+    "static/js/703.583aee6b.chunk.js": "/react-gh-pages/static/js/703.583aee6b.chunk.js",
+    "static/js/513.5d434f1e.chunk.js": "/react-gh-pages/static/js/513.5d434f1e.chunk.js",
+    "static/js/496.e907c07a.chunk.js": "/react-gh-pages/static/js/496.e907c07a.chunk.js",
+    "static/media/revicons.eot": "/react-gh-pages/static/media/revicons.a77de540a38981833f9e.eot",
+    "static/media/revicons.ttf": "/react-gh-pages/static/media/revicons.57fd05d4ae650374c8de.ttf",
+    "static/media/revicons.woff": "/react-gh-pages/static/media/revicons.e8746a624ed098489406.woff",
+    "index.html": "/react-gh-pages/index.html",
+    "main.2af26fca.css.map": "/react-gh-pages/static/css/main.2af26fca.css.map",
+    "main.29d6f51f.js.map": "/react-gh-pages/static/js/main.29d6f51f.js.map",
+    "703.583aee6b.chunk.js.map": "/react-gh-pages/static/js/703.583aee6b.chunk.js.map",
+    "513.5d434f1e.chunk.js.map": "/react-gh-pages/static/js/513.5d434f1e.chunk.js.map",
+    "496.e907c07a.chunk.js.map": "/react-gh-pages/static/js/496.e907c07a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2af26fca.css",
+    "static/js/main.29d6f51f.js"
+  ]
+}
