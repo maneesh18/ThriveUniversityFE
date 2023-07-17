@@ -33,6 +33,7 @@ function Header() {
     handleClose();
   };
 
+  const url = "https://Maneesh18.github.io/ThriveUniversityFE";
   const navigate = useNavigate();
 
   return (
@@ -45,7 +46,7 @@ function Header() {
         style={{ height: "70px" }}
       >
         <Container fluid>
-          <Navbar.Brand href="/">
+          <Navbar.Brand href={url+"/"}>
             <img
               alt="logo"
               src="../images/logo.jpeg"
@@ -75,19 +76,19 @@ function Header() {
             ></Offcanvas.Header>
             <Offcanvas.Body className="offcanvas-onactive" variant="light">
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Nav.Link as={Link} onClick={handleLinkClick} to="/">
+                <Nav.Link as={Link} onClick={handleLinkClick} to={url+"/"}>
                   Home
                 </Nav.Link>
-                <Nav.Link as={Link} onClick={handleLinkClick} to="/about">
+                <Nav.Link as={Link} onClick={handleLinkClick} to={url+"/about"}>
                   About
                 </Nav.Link>
-                <Nav.Link as={Link} onClick={handleLinkClick} to="/academics">
+                <Nav.Link as={Link} onClick={handleLinkClick} to={url+"/academics"}>
                   Academics
                 </Nav.Link>
-                <Nav.Link as={Link} onClick={handleLinkClick} to="/placements">
+                <Nav.Link as={Link} onClick={handleLinkClick} to={url+"/placements"}>
                   Placements{" "}
                 </Nav.Link>
-                <Nav.Link as={Link} onClick={handleLinkClick} to="/contact">
+                <Nav.Link as={Link} onClick={handleLinkClick} to={url+"/contact"}>
                   Contact
                 </Nav.Link>
               </Nav>

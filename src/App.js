@@ -15,19 +15,20 @@ import PageNotFound from "./PageNotFound";
 
 
 function App() {
+  const url = "https://Maneesh18.github.io/ThriveUniversityFE"
   return (
     <div className="App">
       
       <Router>
       <Header />
         <Routes>
-          <Route exact path="/" element={<Home />}></Route>
-          <Route exact path="/about" element={<About />}></Route>
-          <Route exact path="/academics" element={<Academics />}></Route>
-          <Route exact path="/placements" element={<Placements />}></Route>
-          <Route exact path="/contact" element={<Contact />}></Route>
-          <Route exact path="/apply" element={<Apply />}></Route>
-          <Route exact path="/info" element={<AcademicInfo />}></Route>
+          <Route exact path={url+"/"} element={<Home />}></Route>
+          <Route exact path={url+"/about"} element={<About />}></Route>
+          <Route exact path={url+"/academics"} element={<Academics />}></Route>
+          <Route exact path={url+"/placements"} element={<Placements />}></Route>
+          <Route exact path={url+"/contact"} element={<Contact />}></Route>
+          <Route exact path={url+"/apply"} element={<Apply />}></Route>
+          <Route exact path={url+"/info"} element={<AcademicInfo />}></Route>
           <Route path="*" element={<PageNotFound/>}></Route>
         </Routes>
       </Router>
