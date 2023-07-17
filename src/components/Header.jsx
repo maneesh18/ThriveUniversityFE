@@ -33,7 +33,7 @@ function Header() {
     handleClose();
   };
 
-  const url = "https://Maneesh18.github.io/ThriveUniversityFE";
+  const url = "https://maneesh18.github.io/ThriveUniversityFE";
   const navigate = useNavigate();
 
   return (
