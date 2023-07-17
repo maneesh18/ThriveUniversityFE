@@ -35,10 +35,6 @@ function Header() {
 
   const navigate = useNavigate();
 
-  function handleLoginClick(event) {
-    navigate("/login", { replace: true });
-    handleClose();
-  }
   return (
     <>
       <Navbar
@@ -95,9 +91,6 @@ function Header() {
                   Contact
                 </Nav.Link>
               </Nav>
-              <Button variant="outline-light" onClick={handleLoginClick}>
-                Login
-              </Button>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>
